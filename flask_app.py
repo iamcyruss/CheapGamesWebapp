@@ -9,3 +9,7 @@ app = Flask(__name__)
 def hello_world():
     return 'Hello from Flask!'
 
+
+@app.route('/wibble')
+def wibble():
+    return 'This is my pointless new page'
