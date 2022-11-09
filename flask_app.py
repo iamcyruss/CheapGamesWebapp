@@ -1,6 +1,6 @@
 import requests
-from flask import Flask
 from cheapsharkapi import return_cheapest as rc
+from flask import Flask
 
 # https://apidocs.cheapshark.com/
 
