@@ -1,7 +1,7 @@
 
 
 
-def return_cheapest():
+def return_cheapest(cheapshark_response_json, store_response_init_json):
     game_title_check = ''
     game_sale_price = ''
     # need to fix the below poop. Trying to check to see if the next title matches the previous title and if so ignore it.
@@ -19,4 +19,4 @@ def return_cheapest():
                            f"Store Name: {store['storeName']}\n"
                            f"Normal Price: {games['normalPrice']}\n"
                            f"Sale Price: {games['salePrice']}\n"
-                           f"Link: {CHEAPSHARP_REDIRECT + games['dealID']}"
+                           f"Link: {CHEAPSHARP_REDIRECT + games['dealID']}\n"

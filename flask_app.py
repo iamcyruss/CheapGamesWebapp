@@ -1,6 +1,6 @@
 import requests
 from flask import Flask
-from cheapsharkapi
+from cheapsharkapi import return_cheapest as rc
 
 # https://apidocs.cheapshark.com/
 
@@ -25,4 +25,5 @@ def hello_world():
 
 @app.route('/wibble')
 def wibble():
-    return 'This is my pointless new page'
+    return rc(cheapshark_response_json=cheapshark_response_json, store_response_init_json=store_response_init_json)
+    #return 'This is my pointless new page'
