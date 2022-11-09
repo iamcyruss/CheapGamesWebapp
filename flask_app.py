@@ -1,6 +1,6 @@
 import requests
 from cheapsharkapi import return_cheapest as rc
-from flask import Flask
+from flask import Flask, render_template
 
 # https://apidocs.cheapshark.com/
 
@@ -17,10 +17,11 @@ cheapshark_response = requests.get(url=CHEAPSHARK_API_DEALS, params=deals_params
 cheapshark_response.raise_for_status()
 cheapshark_response_json = cheapshark_response.json()
 app = Flask(__name__)
+app.config["DEBUG"] = True
 
 @app.route('/')
-def hello_world():
-    return 'Hello from Flask!'
+def index():
+    return render_template("templates/main_page.html")
 
 
 @app.route('/wibble')
