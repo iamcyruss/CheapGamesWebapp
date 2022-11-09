@@ -15,8 +15,4 @@ def return_cheapest(cheapshark_response_json, store_response_init_json):
         else:
             for store_counts, store in enumerate(store_response_init_json):
                 if games['storeID'] == store['storeID']:
-                    return f"Title: {games['title']}\n"
-                           f"Store Name: {store['storeName']}\n"
-                           f"Normal Price: {games['normalPrice']}\n"
-                           f"Sale Price: {games['salePrice']}\n"
-                           f"Link: {CHEAPSHARP_REDIRECT + games['dealID']}\n"
+                    return f"Title: {games['title']}\nStore Name: {store['storeName']}\nNormal Price: {games['normalPrice']}\nSale Price: {games['salePrice']}\nLink: {CHEAPSHARP_REDIRECT + games['dealID']}\n"
