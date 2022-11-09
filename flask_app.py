@@ -19,7 +19,7 @@ cheapshark_response_json = cheapshark_response.json()
 app = Flask(__name__)
 app.config["DEBUG"] = True
 
-@app.route('/')
+@app.route('/', methods=["GET", "POST"])
 def index():
     return render_template("main_page.html")
 
