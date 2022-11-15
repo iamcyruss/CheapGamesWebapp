@@ -5,7 +5,7 @@ import os
 
 # https://apidocs.cheapshark.com/
 
-SQLPASS = os.getenv("SECRET_KEY")
+SQLPASS = os.getenv("SQLPASS")
 CHEAPSHARK_API_DEALS = "https://www.cheapshark.com/api/1.0/deals"
 CHEAPSHARK_API_STORES = "https://www.cheapshark.com/api/1.0/stores"
 CHEAPSHARP_REDIRECT = "https://www.cheapshark.com/redirect?dealID="
