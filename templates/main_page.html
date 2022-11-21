@@ -48,13 +48,20 @@
         <div class="container">
             {% for game_data in cheapshark_data %}
 
-                {{ game_data.title }}
-                <br>
-                {{ game_data.dealID }}
-                <br>
-                {{ game_data.normalPrice }}
-                <br>
-                {{ game_data.salePrice }}
+                <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+                      <div class="toast-header">
+                            <img src="..." class="rounded me-2" alt="...">
+                            <strong class="me-auto">{{ game_data.title }}</strong>
+                            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                      </div>
+                      <div class="toast-body">
+                            {{ game_data.dealID }}
+                            <br>
+                            {{ game_data.normalPrice }}
+                            <br>
+                            {{ game_data.salePrice }}
+                      </div>
+                </div>
                 <br>
                 <br>
 
