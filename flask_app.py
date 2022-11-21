@@ -18,8 +18,10 @@ deals_params = {
 cheapshark_response = requests.get(url=CHEAPSHARK_API_DEALS, params=deals_params)
 cheapshark_response.raise_for_status()
 cheapshark_response_json = cheapshark_response.json()
+
 app = Flask(__name__)
 app.config["DEBUG"] = True
+
 SQLALCHEMY_DATABASE_URI = "mysql+mysqlconnector://{username}:{password}@{hostname}/{databasename}".format(
     username="rnicosia",
     password=SQLPASS,
@@ -32,7 +34,7 @@ app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
 @app.route('/', methods=["GET", "POST"])
 def index():
-    return render_template("main_page.html")
+    return render_template("main_page.html", cheapshark_data=cheapshark_response_json)
 
 
 @app.route('/wibble')
