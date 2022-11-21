@@ -49,7 +49,14 @@
         <div class="container">
             {% for game_data in cheapshark_data %}
 
-                {{ game_data }}
+                {{ game_data.title }}
+                <br>
+                {{ game_data.dealID }}
+                <br>
+                {{ game_data.normalPrice }}
+                <br>
+                {{ game_data.salePrice }}
+                <br>
                 <br>
 
             {% endfor %}
