@@ -44,10 +44,14 @@
                     <input type="submit" class="btn btn-success" value="Post comment">
                 </form>
             </div>
-        </div><!-- /.container -->
+        </div>
 
-        <div>
-            {{ cheapshark_data }}
+        <div class="container">
+            {% for game_data in cheapshark_data %}
+
+                {{ game_data }}
+
+            {% endfor %}
         </div>
 
     </body>
