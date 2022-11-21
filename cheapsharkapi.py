@@ -17,11 +17,11 @@ def return_cheapest(cheapshark_response_json, store_response_init_json):
             for store_counts, store in enumerate(store_response_init_json):
                 if games['storeID'] == store['storeID']:
                     cheapest_dict = {
-                        "title": {games['title']},
-                        "storeName": {store['storeName']},
-                        "normalPrice": {games['normalPrice']},
-                        "salePrice": {games['salePrice']},
-                        "link": {CHEAPSHARP_REDIRECT + games['dealID']}
+                        "title": games['title'],
+                        "storeName": store['storeName'],
+                        "normalPrice": games['normalPrice'],
+                        "salePrice": games['salePrice'],
+                        "link": CHEAPSHARP_REDIRECT + games['dealID']
                     }
                     return cheapest_dict
                     #print(f"Title: {games['title']}\nStore Name: {store['storeName']}\nNormal Price: {games['normalPrice']}\nSale Price: {games['salePrice']}\nLink: {CHEAPSHARP_REDIRECT + games['dealID']}\n")
