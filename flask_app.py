@@ -32,9 +32,11 @@ app.config["SQLALCHEMY_DATABASE_URI"] = SQLALCHEMY_DATABASE_URI
 app.config["SQLALCHEMY_POOL_RECYCLE"] = 299
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
+data = rc(cheapshark_response_json, store_response_init_json)
+
 @app.route('/', methods=["GET", "POST"])
 def index():
-    return render_template("main_page.html", cheapshark_data=cheapshark_response_json)
+    return render_template("main_page.html", cheapshark_data=data)
 
 
 @app.route('/wibble')

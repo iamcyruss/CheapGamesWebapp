@@ -48,16 +48,18 @@
         {% for game_data in cheapshark_data %}
 
             <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-                  <div class="toast-header">
-                        <strong class="me-auto">Game Title: {{ game_data.title }}</strong>
-                  </div>
-                  <div class="toast-body">
-                        DealID: {{ game_data.dealID }}
-                        <br>
-                        Normal Price: {{ game_data.normalPrice }}
-                        <br>
-                        Sale Price: {{ game_data.salePrice }}
-                  </div>
+                <div class="toast-header">
+                    <strong class="me-auto">Game Title: {{ game_data.title }}</strong>
+                </div>
+                <div class="toast-body">
+                    Normal Price: {{ game_data.normalPrice }}
+                    <br>
+                    Sale Price: {{ game_data.salePrice }}
+                    <br>
+                    Store: {{ game_data.storeName }}
+                    <br>
+                    Link: {{ game_data.link }}
+                </div>
             </div>
             <br>
             <br>
