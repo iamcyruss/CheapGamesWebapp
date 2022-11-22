@@ -49,13 +49,13 @@
 
         {% for game_data in cheapshark_data %}
 
-            <div class="containerbg-success">
+            <div class="container bg-success">
                 <span class="border p-2 border-3 rounded">
                     <div class="row"><strong class="me-auto">Game Title: {{ game_data['title'] }}</strong></div>
                     <div class="row">Normal Price: {{ game_data['normalPrice'] }}</div>
                     <div class="row">Sale Price: {{ game_data.salePrice }}</div>
                     <div class="row">Store: {{ game_data.storeName }}</div>
-                    <div class="row"></div>Link: <a href='{{ game_data.link }}'>{{ game_data.link }}</a></div>
+                    <div class="row">Link: <a href='{{ game_data.link }}'>{{ game_data.link }}</a></div>
                 </span>
             </div>
             <br>
