@@ -42,5 +42,3 @@ def index():
 @app.route('/wibble')
 def wibble():
     return cheapshark_response_json
-    #return rc(cheapshark_response_json=cheapshark_response_json, store_response_init_json=store_response_init_json)
-    #return 'This is my pointless new page'
