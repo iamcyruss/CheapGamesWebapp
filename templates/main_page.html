@@ -51,9 +51,13 @@
 
             <div class="container bg-success" style="padding: 10px; border: 3px; border-color: black;">
                 <strong class="me-auto">Game Title: {{ game_data['title'] }}</strong>
+                <br>
                 Normal Price: {{ game_data['normalPrice'] }}
+                <br>
                 Sale Price: {{ game_data.salePrice }}
+                <br>
                 Store: {{ game_data.storeName }}
+                <br>
                 Link: <a href='{{ game_data.link }}'>{{ game_data.link }}</a>
             </div>
             <br>
