@@ -7,7 +7,7 @@ def return_cheapest(cheapshark_response_json, store_response_init_json):
     CHEAPSHARP_REDIRECT = "https://www.cheapshark.com/redirect?dealID="
     # need to fix the below poop. Trying to check to see if the next title matches the previous title and if so ignore it.
     # it should look at the previous title and previous sale price and if the same then ignore it.
-    cheapest_dict = {}
+    cheapest_dict_list = []
     for games_counts, games in enumerate(cheapshark_response_json):
         #print(f"Title #{games_counts}: {games['title']}")
         if games['title'] == game_title_check and games['salePrice'] == game_sale_check:
@@ -24,4 +24,5 @@ def return_cheapest(cheapshark_response_json, store_response_init_json):
                         "salePrice": games['salePrice'],
                         "link": CHEAPSHARP_REDIRECT + games['dealID']
                     }
-    return cheapest_dict
+                    cheapest_dict_list.append(cheapest_dict)
+    return cheapest_dict_list
