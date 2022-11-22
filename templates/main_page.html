@@ -49,7 +49,7 @@
 
         {% for game_data in cheapshark_data %}
 
-            <div class="container border border-3 rounded bg-success p-2">
+            <div class="row border border-3 rounded bg-success" style="padding: 10px;">
                 <div class="row"><strong class="me-auto">Game Title: {{ game_data['title'] }}</strong></div>
                 <div class="row">Normal Price: {{ game_data['normalPrice'] }}</div>
                 <div class="row">Sale Price: {{ game_data.salePrice }}</div>
