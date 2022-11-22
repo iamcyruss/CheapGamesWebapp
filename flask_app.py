@@ -46,7 +46,7 @@ user_input_data = []
 def index():
     if request.method == "GET":
         return render_template("main_page.html", cheapshark_data=data,
-                               user_input_data=user_input_data,)
+                               user_input_data=user_input_data)
 
     user_input_data.append(request.form["contents"])
     return redirect(url_for('index'))
