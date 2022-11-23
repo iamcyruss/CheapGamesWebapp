@@ -66,7 +66,7 @@ def index():
             }
             cheapshark_data = rc(deals_params)
             return render_template("main_page.html", cheapshark_data=cheapshark_data)
-        elif request.form['twenty_to_thirty']:
+        elif request.form['get_games'] == "Games $20 to $30":
             deals_params = {
                 "sortBy": "Price",
                 "pageNumber": 0,
@@ -75,7 +75,7 @@ def index():
             }
             cheapshark_data = rc(deals_params)
             return render_template("main_page.html", cheapshark_data=cheapshark_data)
-        elif request.form['thirty_to_forty']:
+        elif request.form['get_games'] == "Games $30 to $40":
             deals_params = {
                 "sortBy": "Price",
                 "pageNumber": 0,
@@ -84,7 +84,7 @@ def index():
             }
             cheapshark_data = rc(deals_params)
             return render_template("main_page.html", cheapshark_data=cheapshark_data)
-        elif request.form['forty_to_fifty']:
+        elif request.form['get_games'] == "Games $40 to $50":
             deals_params = {
                 "sortBy": "Price",
                 "pageNumber": 0,
@@ -93,7 +93,7 @@ def index():
             }
             cheapshark_data = rc(deals_params)
             return render_template("main_page.html", cheapshark_data=cheapshark_data)
-        elif request.form['over_fifty']:
+        elif request.form['get_games'] == "Games Over $50":
             deals_params = {
                 "sortBy": "Price",
                 "pageNumber": 0,
