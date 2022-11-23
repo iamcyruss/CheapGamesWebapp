@@ -61,7 +61,7 @@ def index():
             deals_params = {
                 "sortBy": "Price",
                 "pageNumber": 0,
-                "lowerPrice": 0,
+                "lowerPrice": 0.01,
                 "upperPrice": 10,
             }
             cheapshark_data = rc(deals_params)
