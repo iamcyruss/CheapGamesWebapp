@@ -48,7 +48,7 @@ def index():
                                #input_data=input_data)
         return render_template("main_page.html")
     elif request.method == "POST":
-        if request.form['under_ten'] == "Games Under $10":
+        if request.form['get_games'] == "Games Under $10":
             deals_params = {
                 "sortBy": "Price",
                 "pageNumber": 0,
@@ -57,7 +57,7 @@ def index():
             }
             cheapshark_data = rc(deals_params)
             return render_template("main_page.html", cheapshark_data=cheapshark_data)
-        elif request.form['under_ten'] == "Games $10 to $20":
+        elif request.form['get_games'] == "Games $10 to $20":
             deals_params = {
                 "sortBy": "Price",
                 "pageNumber": 0,
