@@ -15,12 +15,12 @@ CHEAPSHARP_REDIRECT = "https://www.cheapshark.com/redirect?dealID="
 store_response_init = requests.get(url=CHEAPSHARK_API_STORES)
 store_response_init.raise_for_status()
 store_response_init_json = store_response_init.json()
-deals_params = {
-    "sortBy": "Price",
-    "pageNumber": page_number,
-    "lowerPrice": lower_price,
-    "upperPrice": upper_price,
-}
+#deals_params = {
+#    "sortBy": "Price",
+#    "pageNumber": page_number,
+#    "lowerPrice": lower_price,
+#    "upperPrice": upper_price,
+#}
 cheapshark_response = requests.get(url=CHEAPSHARK_API_DEALS, params=deals_params)
 cheapshark_response.raise_for_status()
 cheapshark_response_json = cheapshark_response.json()
@@ -38,19 +38,27 @@ app.config["SQLALCHEMY_DATABASE_URI"] = SQLALCHEMY_DATABASE_URI
 app.config["SQLALCHEMY_POOL_RECYCLE"] = 299
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
-data = rc(cheapshark_response_json, store_response_init_json)
-
-user_input_data = []
-input_data = ''
+#user_input_data = []
+#input_data = ''
 
 @app.route('/', methods=["GET", "POST"])
 def index():
     if request.method == "GET":
-        return render_template("main_page.html", cheapshark_data=data,
-                               user_input_data=user_input_data,
-                               input_data=input_data)
+        #return render_template("main_page.html", cheapshark_data=data,
+                               #user_input_data=user_input_data,
+                               #input_data=input_data)
+        return render_template("main_page.html")
+    elif request.method == "POST":
+        if request.form['under_ten']:
+            deals_params = {
+                "sortBy": "Price",
+                "pageNumber": 0,
+                "lowerPrice": 0,
+                "upperPrice": 10,
+            }
+            rc(deals_params)
 
-    user_input_data.append(request.form["contents"])
+    #user_input_data.append(request.form["contents"])
     return redirect(url_for('index'))
 
 @app.route('/wibble')

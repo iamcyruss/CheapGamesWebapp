@@ -39,8 +39,7 @@
 
             <div class="row">
                 <form action="." method="POST">
-                    <textarea class="form-control" name="contents" placeholder="Enter a comment"></textarea>
-                    <input type="submit" class="btn btn-success" value="Post comment">
+                    <input type="submit" class="btn btn-success" name="under_ten" value="Games Under $10">
                 </form>
             </div>
         </div>
@@ -49,11 +48,11 @@
             {{ cheapshark_data }}
         </div>
         -->
-        <div class="container">
+        <!--<div class="container">
             {% for data in user_input_data %}
                 Hello: {{ data }}
             {% endfor %}
-        </div>
+        </div>-->
         <div class="container">
 
         {% for game_data in cheapshark_data %}
