@@ -49,7 +49,9 @@
         </div>
         -->
         <div class="container">
-            {{ user_input_data.content }}
+            {% for data in user_input_data %}
+                {{ data.content }}
+            {% endfor %}
         </div>
         <div class="container">
 
