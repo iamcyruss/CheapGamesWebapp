@@ -6,7 +6,7 @@ import os
 # https://apidocs.cheapshark.com/
 
 SQLPASS = os.getenv("SQLPASS")
-page_number = 10
+page_number = 1000
 lower_price = 0
 upper_price = 50
 CHEAPSHARK_API_DEALS = "https://www.cheapshark.com/api/1.0/deals"
@@ -41,12 +41,14 @@ app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 data = rc(cheapshark_response_json, store_response_init_json)
 
 user_input_data = []
+input_data = ''
 
 @app.route('/', methods=["GET", "POST"])
 def index():
     if request.method == "GET":
         return render_template("main_page.html", cheapshark_data=data,
-                               user_input_data=user_input_data)
+                               user_input_data=user_input_data,
+                               input_data=input_data)
 
     user_input_data.append(request.form["contents"])
     return redirect(url_for('index'))
