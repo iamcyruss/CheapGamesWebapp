@@ -55,10 +55,9 @@ def index():
                 "lowerPrice": 0,
                 "upperPrice": 10,
             }
-            rc(deals_params)
-
+            cheapshark_data = rc(deals_params)
+            return render_template("main_page.html", cheapshark_data=cheapshark_data)
     #user_input_data.append(request.form["contents"])
-    return redirect(url_for('index'))
 
 @app.route('/wibble')
 def wibble():
