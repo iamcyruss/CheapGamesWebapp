@@ -57,6 +57,51 @@ def index():
             }
             cheapshark_data = rc(deals_params)
             return render_template("main_page.html", cheapshark_data=cheapshark_data)
+        elif request.form['ten_to_twenty']:
+            deals_params = {
+                "sortBy": "Price",
+                "pageNumber": 0,
+                "lowerPrice": 10,
+                "upperPrice": 20,
+            }
+            cheapshark_data = rc(deals_params)
+            return render_template("main_page.html", cheapshark_data=cheapshark_data)
+        elif request.form['twenty_to_thirty']:
+            deals_params = {
+                "sortBy": "Price",
+                "pageNumber": 0,
+                "lowerPrice": 20,
+                "upperPrice": 30,
+            }
+            cheapshark_data = rc(deals_params)
+            return render_template("main_page.html", cheapshark_data=cheapshark_data)
+        elif request.form['thirty_to_forty']:
+            deals_params = {
+                "sortBy": "Price",
+                "pageNumber": 0,
+                "lowerPrice": 30,
+                "upperPrice": 40,
+            }
+            cheapshark_data = rc(deals_params)
+            return render_template("main_page.html", cheapshark_data=cheapshark_data)
+        elif request.form['forty_to_fifty']:
+            deals_params = {
+                "sortBy": "Price",
+                "pageNumber": 0,
+                "lowerPrice": 40,
+                "upperPrice": 49.99,
+            }
+            cheapshark_data = rc(deals_params)
+            return render_template("main_page.html", cheapshark_data=cheapshark_data)
+        elif request.form['over_fifty']:
+            deals_params = {
+                "sortBy": "Price",
+                "pageNumber": 0,
+                "lowerPrice": 50,
+                "upperPrice": 50,
+            }
+            cheapshark_data = rc(deals_params)
+            return render_template("main_page.html", cheapshark_data=cheapshark_data)
     #user_input_data.append(request.form["contents"])
 
 @app.route('/wibble')
