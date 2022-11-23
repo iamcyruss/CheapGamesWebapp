@@ -6,7 +6,7 @@ import os
 # https://apidocs.cheapshark.com/
 
 SQLPASS = os.getenv("SQLPASS")
-page_number = 1000
+page_number = 0
 lower_price = 0
 upper_price = 50
 CHEAPSHARK_API_DEALS = "https://www.cheapshark.com/api/1.0/deals"
