@@ -48,7 +48,16 @@ def index():
                                #input_data=input_data)
         return render_template("main_page.html")
     elif request.method == "POST":
-        if request.form['get_games'] == "Games Under $10":
+        if request.form['get_games'] == "Free Games":
+            deals_params = {
+                "sortBy": "Price",
+                "pageNumber": 0,
+                "lowerPrice": 0,
+                "upperPrice": 0,
+            }
+            cheapshark_data = rc(deals_params)
+            return render_template("main_page.html", cheapshark_data=cheapshark_data)
+        elif request.form['get_games'] == "Games Under $10":
             deals_params = {
                 "sortBy": "Price",
                 "pageNumber": 0,
