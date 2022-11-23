@@ -6,9 +6,7 @@ import os
 # https://apidocs.cheapshark.com/
 
 SQLPASS = os.getenv("SQLPASS")
-page_number = 0
-lower_price = 0
-upper_price = 50
+'''
 CHEAPSHARK_API_DEALS = "https://www.cheapshark.com/api/1.0/deals"
 CHEAPSHARK_API_STORES = "https://www.cheapshark.com/api/1.0/stores"
 CHEAPSHARP_REDIRECT = "https://www.cheapshark.com/redirect?dealID="
@@ -24,6 +22,7 @@ store_response_init_json = store_response_init.json()
 cheapshark_response = requests.get(url=CHEAPSHARK_API_DEALS, params=deals_params)
 cheapshark_response.raise_for_status()
 cheapshark_response_json = cheapshark_response.json()
+'''
 
 app = Flask(__name__)
 app.config["DEBUG"] = True
