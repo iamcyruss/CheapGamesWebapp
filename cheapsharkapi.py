@@ -22,6 +22,8 @@ def return_cheapest(deals_params):
             game_title_check = cheapshark_response_json[games_counts]['title']
             game_sale_check = cheapshark_response_json[games_counts]['salePrice']
             #print(f"Title #{games_counts}: {game_title_check}")
+        elif games['normalPrice'] == games['salePrice']:
+            pass
         else:
             for store_counts, store in enumerate(store_response_init_json):
                 if games['storeID'] == store['storeID']:
