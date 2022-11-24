@@ -38,14 +38,11 @@ app.config["SQLALCHEMY_POOL_RECYCLE"] = 299
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
 #user_input_data = []
-#input_data = ''
+input_data = ''
 
 @app.route('/', methods=["GET", "POST"])
 def index():
     if request.method == "GET":
-        #return render_template("main_page.html", cheapshark_data=data,
-                               #user_input_data=user_input_data,
-                               #input_data=input_data)
         return render_template("main_page.html")
     elif request.method == "POST":
         if request.form['get_games'] == "Free Games":
@@ -108,6 +105,14 @@ def index():
                 "pageNumber": 0,
                 "lowerPrice": 50,
                 "upperPrice": 50,
+            }
+            cheapshark_data = rc(deals_params)
+            return render_template("main_page.html", cheapshark_data=cheapshark_data)
+        elif requests.form['game_title_button'] == "Search":
+            input_data = request.form['game_title_text']
+            deals_params = {
+                "sortBy": "Price",
+                "title": input_data
             }
             cheapshark_data = rc(deals_params)
             return render_template("main_page.html", cheapshark_data=cheapshark_data)
