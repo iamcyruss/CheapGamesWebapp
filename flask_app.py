@@ -108,7 +108,7 @@ def index():
             }
             cheapshark_data = rc(deals_params)
             return render_template("main_page.html", cheapshark_data=cheapshark_data)
-        elif requests.form['get_games'] == "Search":
+        elif request.form['get_games'] == "Search":
             input_data = request.form['game_title_text']
             deals_params = {
                 "sortBy": "Price",
