@@ -27,16 +27,6 @@
             <div class="row">
                 This is the first dummy comment.
             </div>
-
-            <div class="row">
-                This is the second dummy comment.  It's no more interesting
-                than the first.
-            </div>
-
-            <div class="row">
-                This is the third dummy comment.  It's actually quite exciting!
-            </div>
-
             <div class="row">
                 <form action="." method="POST">
                     <input type="submit" class="btn btn-success" name="get_games" value="Free Games">
@@ -48,23 +38,16 @@
                     <input type="submit" class="btn btn-success" name="get_games" value="Games Over $50">
                 </form>
             </div>
-            <div class="row">
-                <form action="." method="POST">
+            <form action="." method="POST">
+                <div class="row">
                     <input type="text" class="form-control" name="game_title_text" placeholder="Search for a specific game title">
+                </div>
+                <div class="row">
                     <input type="submit" class="btn btn-primary" name="get_games" value="Search">
-                </form>
+                </div>
+            </form>
             </div>
         </div>
-        <!--
-        <div class="container">
-            {{ cheapshark_data }}
-        </div>
-        -->
-        <!--<div class="container">
-            {% for data in user_input_data %}
-                Hello: {{ data }}
-            {% endfor %}
-        </div>-->
         <div class="container">
 
         {% for game_data in cheapshark_data %}
