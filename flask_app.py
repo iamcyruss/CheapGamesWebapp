@@ -116,6 +116,13 @@ def index():
             }
             cheapshark_data = rc(deals_params)
             return render_template("main_page.html", cheapshark_data=cheapshark_data)
+        elif request.form['get_games'] == "Metacritic 90+ Games":
+            deals_params = {
+                "sortBy": "Price",
+                "metacritic": 90
+            }
+            cheapshark_data = rc(deals_params)
+            return render_template("main_page.html", cheapshark_data=cheapshark_data)
     #user_input_data.append(request.form["contents"])
 
 @app.route('/wibble')
