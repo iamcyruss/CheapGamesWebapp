@@ -25,7 +25,7 @@ cheapshark_response_json = cheapshark_response.json()
 '''
 
 app = Flask(__name__)
-app.config["DEBUG"] = True
+app.config["DEBUG"] = False
 
 SQLALCHEMY_DATABASE_URI = "mysql+mysqlconnector://{username}:{password}@{hostname}/{databasename}".format(
     username="rnicosia",
