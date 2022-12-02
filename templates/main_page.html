@@ -41,17 +41,18 @@
                 <div class="row">
                     <input type="text" class="form-control" name="game_title_text" placeholder="Search for a specific game title" style="padding: 5px">
                 </div>
-                <div class="row">
-                    <input type="submit" class="btn btn-primary" name="get_games" value="Search" style="padding: 5px">
+                <div class="row" style="width: 12rem;">
+                    <input type="submit" class="btn btn-secondary" name="get_games" value="Search" style="padding: 5px">
                 </div>
             </form>
             </div>
         </div>
+        <br>
         <div class="container">
 
         {% for game_data in cheapshark_data %}
 
-            <div class="card" style="width: 18rem;">
+            <div class="card" style="width: 36rem;">
                 <div class="card-header">
                     <h5 class="card-title"><strong>Game Title: {{ game_data['title'] }}</strong></h5>
                 </div>
@@ -61,21 +62,9 @@
                         <br>
                         Sale Price: {{ game_data.salePrice }}
                     </p>
-                    <a href='{{ game_data.link }}' target="_blank" class="btn btn-primary">{{ game_data.storeName }}</a>
+                    <a href='{{ game_data.link }}' target="_blank" class="btn btn-info">{{ game_data.storeName }}</a>
                 </div>
             </div>
-
-            <!--
-            <div class="row bg-success" style="padding: 5px;border-style: solid; border-width: 3px; border-color: black;">
-                <strong class="me-auto">Game Title: {{ game_data['title'] }}</strong>
-                <br>
-                Normal Price: {{ game_data['normalPrice'] }}
-                <br>
-                Sale Price: {{ game_data.salePrice }}
-                <br>
-                Store/Link: <a href='{{ game_data.link }}' target="_blank">{{ game_data.storeName }}</a>
-            </div>
-            -->
             <br>
 
         {% endfor %}
