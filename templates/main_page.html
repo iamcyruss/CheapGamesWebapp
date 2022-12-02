@@ -54,9 +54,9 @@
             <div class="card" style="width: 18rem;">
                 <img src="../static/steam.svg" class="card-img-top" alt="...">
                 <div class="card-body">
-                    <h5 class="card-title"><strong>Game Title: {{ game_data['title'] }}</strong></h5>
+                    <p class="card-text"><h5 class="card-title"><strong>Game Title: {{ game_data['title'] }}</strong></h5>
                     Normal Price: {{ game_data['normalPrice'] }}
-                    Sale Price: {{ game_data.salePrice }}
+                    Sale Price: {{ game_data.salePrice }}</p>
                     <a href='{{ game_data.link }}' target="_blank" class="btn btn-primary">{{ game_data.storeName }}</a>
                 </div>
             </div>
