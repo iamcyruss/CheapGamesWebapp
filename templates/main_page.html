@@ -5,11 +5,11 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="icon" type="image/x-icon" href="../static/video-game-32.png">
-
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     </head>
 
     <body>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
         <nav class="navbar navbar-inverse">
             <div class="container">
                 <div class="navbar-header">
@@ -52,16 +52,11 @@
         {% for game_data in cheapshark_data %}
 
             <div class="card" style="width: 18rem;">
-                <img src="..." class="card-img-top" alt="...">
+                <img src="../static/steam.svg" class="card-img-top" alt="...">
                 <div class="card-body">
                     <h5 class="card-title"><strong>Game Title: {{ game_data['title'] }}</strong></h5>
-                    <p class="card-text">
-                        <br>
-                        Normal Price: {{ game_data['normalPrice'] }}
-                        <br>
-                        Sale Price: {{ game_data.salePrice }}
-                        <br>
-                    </p>
+                    <p class="card-text">Normal Price: {{ game_data['normalPrice'] }}</p>
+                    <p class="card-text">Sale Price: {{ game_data.salePrice }}</p>
                     <a href='{{ game_data.link }}' target="_blank" class="btn btn-primary">{{ game_data.storeName }}</a>
                 </div>
             </div>
