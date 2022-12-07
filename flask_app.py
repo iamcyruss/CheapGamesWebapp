@@ -1,15 +1,16 @@
 import requests
 from cheapsharkapi import return_cheapest as rc
+from cheapsharkapi import return_game as rg
 from flask import Flask, render_template, redirect, request, url_for
 import os
 
 # https://apidocs.cheapshark.com/
 
 SQLPASS = os.getenv("SQLPASS")
-'''
 CHEAPSHARK_API_DEALS = "https://www.cheapshark.com/api/1.0/deals"
 CHEAPSHARK_API_STORES = "https://www.cheapshark.com/api/1.0/stores"
 CHEAPSHARP_REDIRECT = "https://www.cheapshark.com/redirect?dealID="
+'''
 store_response_init = requests.get(url=CHEAPSHARK_API_STORES)
 store_response_init.raise_for_status()
 store_response_init_json = store_response_init.json()
@@ -52,7 +53,7 @@ def index():
                 "lowerPrice": 0,
                 "upperPrice": 0,
             }
-            cheapshark_data = rc(deals_params)
+            cheapshark_data = rc(deals_params, CHEAPSHARK_API_DEALS, CHEAPSHARK_API_STORES, CHEAPSHARP_REDIRECT)
             return render_template("main_page.html", cheapshark_data=cheapshark_data)
         elif request.form['get_games'] == "Games Under $10":
             deals_params = {
@@ -61,7 +62,7 @@ def index():
                 "lowerPrice": 0.01,
                 "upperPrice": 10,
             }
-            cheapshark_data = rc(deals_params)
+            cheapshark_data = rc(deals_params, CHEAPSHARK_API_DEALS, CHEAPSHARK_API_STORES, CHEAPSHARP_REDIRECT)
             return render_template("main_page.html", cheapshark_data=cheapshark_data)
         elif request.form['get_games'] == "Games $10 to $20":
             deals_params = {
@@ -70,7 +71,7 @@ def index():
                 "lowerPrice": 10,
                 "upperPrice": 20,
             }
-            cheapshark_data = rc(deals_params)
+            cheapshark_data = rc(deals_params, CHEAPSHARK_API_DEALS, CHEAPSHARK_API_STORES, CHEAPSHARP_REDIRECT)
             return render_template("main_page.html", cheapshark_data=cheapshark_data)
         elif request.form['get_games'] == "Games $20 to $30":
             deals_params = {
@@ -79,7 +80,7 @@ def index():
                 "lowerPrice": 20,
                 "upperPrice": 30,
             }
-            cheapshark_data = rc(deals_params)
+            cheapshark_data = rc(deals_params, CHEAPSHARK_API_DEALS, CHEAPSHARK_API_STORES, CHEAPSHARP_REDIRECT)
             return render_template("main_page.html", cheapshark_data=cheapshark_data)
         elif request.form['get_games'] == "Games $30 to $40":
             deals_params = {
@@ -88,7 +89,7 @@ def index():
                 "lowerPrice": 30,
                 "upperPrice": 40,
             }
-            cheapshark_data = rc(deals_params)
+            cheapshark_data = rc(deals_params, CHEAPSHARK_API_DEALS, CHEAPSHARK_API_STORES, CHEAPSHARP_REDIRECT)
             return render_template("main_page.html", cheapshark_data=cheapshark_data)
         elif request.form['get_games'] == "Games $40 to $50":
             deals_params = {
@@ -97,7 +98,7 @@ def index():
                 "lowerPrice": 40,
                 "upperPrice": 49.99,
             }
-            cheapshark_data = rc(deals_params)
+            cheapshark_data = rc(deals_params, CHEAPSHARK_API_DEALS, CHEAPSHARK_API_STORES, CHEAPSHARP_REDIRECT)
             return render_template("main_page.html", cheapshark_data=cheapshark_data)
         elif request.form['get_games'] == "Games Over $50":
             deals_params = {
@@ -106,7 +107,7 @@ def index():
                 "lowerPrice": 50,
                 "upperPrice": 50,
             }
-            cheapshark_data = rc(deals_params)
+            cheapshark_data = rc(deals_params, CHEAPSHARK_API_DEALS, CHEAPSHARK_API_STORES, CHEAPSHARP_REDIRECT)
             return render_template("main_page.html", cheapshark_data=cheapshark_data)
         elif request.form['get_games'] == "Search":
             input_data = request.form['game_title_text']
@@ -114,14 +115,14 @@ def index():
                 "sortBy": "Price",
                 "title": input_data
             }
-            cheapshark_data = rc(deals_params)
+            cheapshark_data = rg(deals_params, CHEAPSHARK_API_DEALS, CHEAPSHARK_API_STORES, CHEAPSHARP_REDIRECT)
             return render_template("main_page.html", cheapshark_data=cheapshark_data)
         elif request.form['get_games'] == "Metacritic 90+ Games":
             deals_params = {
                 "sortBy": "Price",
                 "metacritic": 90
             }
-            cheapshark_data = rc(deals_params)
+            cheapshark_data = rc(deals_params, CHEAPSHARK_API_DEALS, CHEAPSHARK_API_STORES, CHEAPSHARP_REDIRECT)
             return render_template("main_page.html", cheapshark_data=cheapshark_data)
     #user_input_data.append(request.form["contents"])
 
