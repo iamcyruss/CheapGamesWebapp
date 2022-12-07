@@ -125,11 +125,6 @@ def index():
             return render_template("main_page.html", cheapshark_data=cheapshark_data)
     #user_input_data.append(request.form["contents"])
 
-@app.route('/wibble')
-def wibble():
-    return cheapshark_response_json
-<<<<<<< HEAD
-    #return rc(cheapshark_response_json=cheapshark_response_json, store_response_init_json=store_response_init_json)
-    #return 'This is my pointless new page'
-=======
->>>>>>> 8a62aea28ba1e53b5f7053d21682099697d194e9
+#@app.route('/wibble')
+#def wibble():
+    #return cheapshark_response_json
