@@ -42,27 +42,28 @@
         </div>
         <br>
         <div class="container">
-        {{ cheapshark_data }}
-        {% for game_data in cheapshark_data %}
-
-            <div class="card border-danger" style="width: 36rem;">
-                <div class="card-header bg-dark">
-                    <p><h5 class="card-title text-light"><strong class="text-danger">Game Title:</strong> {{ game_data['title'] }}</h5></p>
+        {% if cheapshark_data == [] }}
+            <strong class="text-danger">Sorry, but I found no results for that selection.</strong>
+        {% else %}
+            {% for game_data in cheapshark_data %}
+                <div class="card border-danger" style="width: 36rem;">
+                    <div class="card-header bg-dark">
+                        <p><h5 class="card-title text-light"><strong class="text-danger">Game Title:</strong> {{ game_data['title'] }}</h5></p>
+                    </div>
+                    <div class="card-body bg-secondary">
+                        <p class="card-text text-light">
+                            <strong class="text-danger">Normal Price:</strong> {{ game_data['normalPrice'] }}
+                            <br>
+                            <strong class="text-danger">Sale Price:</strong> {{ game_data.salePrice }}
+                            <br>
+                            <strong class="text-danger">Game ID:</strong> {{ game_data.gameID }}
+                        </p>
+                        <a href='{{ game_data.link }}' target="_blank" class="btn btn-success">{{ game_data.storeName }}</a>
+                    </div>
                 </div>
-                <div class="card-body bg-secondary">
-                    <p class="card-text text-light">
-                        <strong class="text-danger">Normal Price:</strong> {{ game_data['normalPrice'] }}
-                        <br>
-                        <strong class="text-danger">Sale Price:</strong> {{ game_data.salePrice }}
-                        <br>
-                        <strong class="text-danger">Game ID:</strong> {{ game_data.gameID }}
-                    </p>
-                    <a href='{{ game_data.link }}' target="_blank" class="btn btn-success">{{ game_data.storeName }}</a>
-                </div>
-            </div>
-            <br>
-
-        {% endfor %}
+                <br>
+            {% endfor %}
+        {% endif %}
 
         </div>
     </body>
