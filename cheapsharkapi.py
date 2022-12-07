@@ -61,7 +61,8 @@ def return_game(deals_params, CHEAPSHARK_API_DEALS, CHEAPSHARK_API_STORES, CHEAP
                         "storeName": store['storeName'],
                         "normalPrice": games['normalPrice'],
                         "salePrice": games['salePrice'],
-                        "link": CHEAPSHARP_REDIRECT + games['dealID']
+                        "link": CHEAPSHARP_REDIRECT + games['dealID'],
+                        "gameID": games['gameID']
                     }
                     cheapest_dict_list.append(cheapest_dict)
     return cheapest_dict_list

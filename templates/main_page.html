@@ -54,6 +54,10 @@
                         <strong class="text-danger">Normal Price:</strong> {{ game_data['normalPrice'] }}
                         <br>
                         <strong class="text-danger">Sale Price:</strong> {{ game_data.salePrice }}
+                        {% if len(game_data.gameID) > 0 %}
+                            <br>
+                            <strong class="text-danger">Game ID:</strong> {{ game_data.gameID }}
+                        {% endif %}
                     </p>
                     <a href='{{ game_data.link }}' target="_blank" class="btn btn-success">{{ game_data.storeName }}</a>
                 </div>
