@@ -81,9 +81,12 @@ def set_alert(CHEAPSHARK_API_ALERT, alert_params):
 
 def manage_alerts(CHEAPSHARK_API_ALERT, alert_params):
     manage_alert = requests.get(url=CHEAPSHARK_API_ALERT, params=alert_params)
+    return manage_alert
+    """
     if manage_alert.status_code == 200:
         all_good = 'Email Sent!'
         return all_good
     else:
         no_good = 'Something went wrong. Please try again.'
         return no_good
+    """
