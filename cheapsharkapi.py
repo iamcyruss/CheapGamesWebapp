@@ -73,7 +73,7 @@ def set_alert(CHEAPSHARK_API_ALERT, alert_params):
     set_alert = requests.get(url=CHEAPSHARK_API_ALERT, params=alert_params)
     if set_alert == '<Response [200]>':
         all_good = 'Successfully add your alert!'
-        return all_good
+        return all_good, set_alert
     else:
         no_good = 'Something went wrong. Please try again.'
-        return no_good
+        return no_good, set_alert
