@@ -132,6 +132,18 @@ def index():
             }
             cheapshark_data = sa(CHEAPSHARK_API_ALERT, alert_params)
             return render_template("main_page.html", cheapshark_data=cheapshark_data)
+        elif request.form['get_games'] == "Delete Alert":
+            price = request.form['price']
+            email = request.form['email']
+            gameid = request.form['gameid']
+            alert_params = {
+                "action": "delete",
+                "price": price,
+                "email": email,
+                "gameID": gameid
+            }
+            cheapshark_data = sa(CHEAPSHARK_API_ALERT, alert_params)
+            return render_template("main_page.html", cheapshark_data=cheapshark_data)
         elif request.form['get_games'] == "Metacritic 90+ Games":
             deals_params = {
                 "sortBy": "Price",
