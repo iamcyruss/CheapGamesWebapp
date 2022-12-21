@@ -2,6 +2,7 @@ import requests
 from cheapsharkapi import return_cheapest as rc
 from cheapsharkapi import return_game as rg
 from cheapsharkapi import set_alert as sa
+from cheapsharkapi import manage_alerts as ma
 from flask import Flask, render_template, redirect, request, url_for
 import os
 
@@ -150,7 +151,7 @@ def index():
                 "action": "manage",
                 "email": email
             }
-            cheapshark_data = sa(CHEAPSHARK_API_ALERT, alert_params)
+            cheapshark_data = ma(CHEAPSHARK_API_ALERT, alert_params)
             return render_template("main_page.html", cheapshark_data=cheapshark_data)
         elif request.form['get_games'] == "Metacritic 90+ Games":
             deals_params = {
