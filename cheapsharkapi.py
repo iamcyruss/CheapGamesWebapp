@@ -69,4 +69,6 @@ def return_game(deals_params, CHEAPSHARK_API_DEALS, CHEAPSHARK_API_STORES, CHEAP
     return cheapest_dict_list
 
 
-#def set_alert(CHEAPSHARK_API_ALERT, setdelete, email, gameid, price):
+def set_alert(CHEAPSHARK_API_ALERT, alert_params):
+    set_alert = requests.get(url=CHEAPSHARK_API_ALERT, params=alert_params)
+    return set_alert

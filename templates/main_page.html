@@ -62,10 +62,10 @@
                         </p>
                         <div class="row">
                             <a href='{{ game_data.link }}' target="_blank" class="btn btn-success">Goto Store Page</a>
-                            <form action="." method="POST">
-                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#pricealert">Setup Price Alert</button>
-                                <div class="modal fade" id="pricealert" tabindex="-1" aria-labelledby="pricealertLabel" aria-hidden="true">
-                                    <div class="modal-dialog">
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#pricealert">Setup Price Alert</button>
+                            <div class="modal fade" id="pricealert" tabindex="-1" aria-labelledby="pricealertLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <form action="." method="POST">
                                         <div class="modal-content">
                                             <div class="modal-header">
                                                 <h1 class="modal-title fs-5" id="pricealertLabel">Setup Price Alert</h1>
@@ -76,15 +76,16 @@
                                                 <input type="number" name="price" placeholder="$30">
                                                 <p>Please enter your email address:</p>
                                                 <input type="email" name="email" placeholder="joesmith@email.com">
+                                                <input type="text" name="gameid" placeholder='{{ game_data.gameID }}'>
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                <input type="submit" class="btn btn-success" name="get_games" value="Set Alert" style="padding: 5px">
+                                                <input type="submit" class="btn btn-success" name="get_games" value="Set Alert" style="padding: 5px" data-bs-dismiss="modal">
                                             </div>
                                         </div>
-                                    </div>
+                                    </form>
                                 </div>
-                            </form>
+                            </div>
                         </div>
                     </div>
                 </div>
