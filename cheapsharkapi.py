@@ -67,3 +67,6 @@ def return_game(deals_params, CHEAPSHARK_API_DEALS, CHEAPSHARK_API_STORES, CHEAP
                     }
                     cheapest_dict_list.append(cheapest_dict)
     return cheapest_dict_list
+
+
+#def set_alert(CHEAPSHARK_API_ALERT, setdelete, email, gameid, price):

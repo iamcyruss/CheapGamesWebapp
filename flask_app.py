@@ -10,6 +10,7 @@ SQLPASS = os.getenv("SQLPASS")
 CHEAPSHARK_API_DEALS = "https://www.cheapshark.com/api/1.0/deals"
 CHEAPSHARK_API_STORES = "https://www.cheapshark.com/api/1.0/stores"
 CHEAPSHARP_REDIRECT = "https://www.cheapshark.com/redirect?dealID="
+CHEAPSHARK_API_ALERT = "https://www.cheapshark.com/api/1.0/alerts"
 '''
 store_response_init = requests.get(url=CHEAPSHARK_API_STORES)
 store_response_init.raise_for_status()
@@ -28,6 +29,7 @@ cheapshark_response_json = cheapshark_response.json()
 app = Flask(__name__)
 app.config["DEBUG"] = False
 
+"""
 SQLALCHEMY_DATABASE_URI = "mysql+mysqlconnector://{username}:{password}@{hostname}/{databasename}".format(
     username="rnicosia",
     password=SQLPASS,
@@ -37,8 +39,8 @@ SQLALCHEMY_DATABASE_URI = "mysql+mysqlconnector://{username}:{password}@{hostnam
 app.config["SQLALCHEMY_DATABASE_URI"] = SQLALCHEMY_DATABASE_URI
 app.config["SQLALCHEMY_POOL_RECYCLE"] = 299
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+"""
 
-#user_input_data = []
 input_data = ''
 
 @app.route('/', methods=["GET", "POST"])
