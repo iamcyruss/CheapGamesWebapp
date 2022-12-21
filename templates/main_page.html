@@ -44,7 +44,7 @@
         <div class="container">
         {% if cheapshark_data == [] %}
             <strong class="text-danger">Sorry, but I found no results for that selection.</strong>
-            {% elif cheapshark_data[1] == '<\Response [200]>' %}
+            {% elif cheapshark_data == '<\Response [200]>' %}
                 <p class="text-light">{{ cheapshark_data }}</p>
             {% else %}
             {% for game_data in cheapshark_data %}
