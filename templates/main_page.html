@@ -44,11 +44,13 @@
         <div class="container">
         {% if cheapshark_data == [] %}
             <strong class="text-danger">Sorry, but I found no results for that selection.</strong>
-            {% elif cheapshark_data == 'Successfully add your alert!' or cheapshark_data == 'Something went wrong. Please try again.' %}
+            {% elif cheapshark_data[1] == '<Response [200]>' %}
                 <p class="text-light">{{ cheapshark_data }}</p>
             {% else %}
             {% for game_data in cheapshark_data %}
                 <p class="text-light">{{ cheapshark_data }}</p>
+                <p class="text-light">{{ cheapshark_data[0] }}</p>
+                <p class="text-light">{{ cheapshark_data[1] }}</p>
                 <div class="card border-danger" style="width: 36rem;">
                     <div class="card-header bg-dark">
                         <p><h5 class="card-title text-light"><strong class="text-danger">Game Title:</strong> {{ game_data['title'] }}</h5></p>
