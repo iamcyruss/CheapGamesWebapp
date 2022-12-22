@@ -66,7 +66,7 @@
             <p class="text-light">{{ cheapshark_data }}</p>
         {% if cheapshark_data == [] %}
             <strong class="text-danger">Sorry, but I found no results for that selection.</strong>
-            {% elif cheapshark_data == true or cheapshark_data == false %}
+            {% elif cheapshark_data == 'Text response: true Status code:200' or cheapshark_data == 'Something went wrong. Please try again. false' %}
                 <p class="text-light">{{ cheapshark_data }}</p>
             {% elif cheapshark_data == 'No alerts found for email' or cheapshark_data == 'Link sent to email' %}
                 <p class="text-light">{{ cheapshark_data }}</p>
