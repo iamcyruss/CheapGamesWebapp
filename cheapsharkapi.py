@@ -72,7 +72,7 @@ def return_game(deals_params, CHEAPSHARK_API_DEALS, CHEAPSHARK_API_STORES, CHEAP
 def set_alert(CHEAPSHARK_API_ALERT, alert_params):
     set_alert = requests.get(url=CHEAPSHARK_API_ALERT, params=alert_params)
     if set_alert.status_code == 200:
-        all_good = f"Text response: {set_alert.text}\nStatus code: {set_alert.status_code}"
+        all_good = f"Text response: {set_alert.text} Status code: {set_alert.status_code}"
         return all_good
     else:
         no_good = f'Something went wrong. Please try again. {set_alert.text}'
