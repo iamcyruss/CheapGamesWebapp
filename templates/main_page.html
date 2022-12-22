@@ -63,7 +63,6 @@
         </div>
         <br>
         <div class="container">
-            <p class="text-light">{{ cheapshark_data }}</p>
         {% if cheapshark_data == [] %}
             <strong class="text-danger">Sorry, but I found no results for that selection.</strong>
             {% elif cheapshark_data == 'Text response: true Status code: 200' or cheapshark_data == 'Something went wrong. Please try again. false' %}
