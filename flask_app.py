@@ -7,6 +7,8 @@ from flask import Flask, render_template, redirect, request, url_for
 import os
 import openai
 
+OPENAI_KEY = os.getenv("OPENAI_KEY")
+openai.api_key = 'your-openai-api-key'
 # https://apidocs.cheapshark.com/
 
 SQLPASS = os.getenv("SQLPASS")
