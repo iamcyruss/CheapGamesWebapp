@@ -8,7 +8,7 @@ import os
 import openai
 
 OPENAI_KEY = os.getenv("OPENAI_KEY")
-openai.api_key = 'your-openai-api-key'
+openai.api_key = OPENAI_KEY
 # https://apidocs.cheapshark.com/
 
 SQLPASS = os.getenv("SQLPASS")
