@@ -1,16 +1,15 @@
-import requests
+
 from cheapsharkapi import return_cheapest as rc
 from cheapsharkapi import return_game as rg
 from cheapsharkapi import set_alert as sa
 from cheapsharkapi import manage_alerts as ma
-from flask import Flask, render_template, redirect, request, url_for
+from flask import Flask, request, render_template, session
 import os
 import openai
 
 OPENAI_KEY = os.getenv("OPENAI_KEY")
 openai.api_key = OPENAI_KEY
 
-#openai.api_key_path = '/home/rnicosia/toppy.txt'
 # https://apidocs.cheapshark.com/
 
 SQLPASS = os.getenv("SQLPASS")
@@ -18,24 +17,9 @@ CHEAPSHARK_API_DEALS = "https://www.cheapshark.com/api/1.0/deals"
 CHEAPSHARK_API_STORES = "https://www.cheapshark.com/api/1.0/stores"
 CHEAPSHARP_REDIRECT = "https://www.cheapshark.com/redirect?dealID="
 CHEAPSHARK_API_ALERT = "https://www.cheapshark.com/api/1.0/alerts"
-'''
-store_response_init = requests.get(url=CHEAPSHARK_API_STORES)
-store_response_init.raise_for_status()
-store_response_init_json = store_response_init.json()
-#deals_params = {
-#    "sortBy": "Price",
-#    "pageNumber": page_number,
-#    "lowerPrice": lower_price,
-#    "upperPrice": upper_price,
-#}
-cheapshark_response = requests.get(url=CHEAPSHARK_API_DEALS, params=deals_params)
-cheapshark_response.raise_for_status()
-cheapshark_response_json = cheapshark_response.json()
-'''
 
 app = Flask(__name__)
 
-"""
 SQLALCHEMY_DATABASE_URI = "mysql+mysqlconnector://{username}:{password}@{hostname}/{databasename}".format(
     username="rnicosia",
     password=SQLPASS,
@@ -45,9 +29,9 @@ SQLALCHEMY_DATABASE_URI = "mysql+mysqlconnector://{username}:{password}@{hostnam
 app.config["SQLALCHEMY_DATABASE_URI"] = SQLALCHEMY_DATABASE_URI
 app.config["SQLALCHEMY_POOL_RECYCLE"] = 299
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
-"""
 
 input_data = ''
+
 
 @app.route('/', methods=["GET", "POST"])
 def index():
@@ -164,41 +148,49 @@ def index():
             }
             cheapshark_data = rc(deals_params, CHEAPSHARK_API_DEALS, CHEAPSHARK_API_STORES, CHEAPSHARP_REDIRECT)
             return render_template("main_page.html", cheapshark_data=cheapshark_data)
-    #user_input_data.append(request.form["contents"])
+    # user_input_data.append(request.form["contents"])
 
 
-@app.route('/fun')
-def home():
-    return render_template('ask_gpt.html')
-
-
-@app.route('/submit', methods=['POST'])
+@app.route('/fun', methods=['POST'])
 def submit():
-    # Get question and model from form
-    question = request.form.get('question')
-    model = request.form.get('model')
+    if request.method == 'POST':
+        # Get question and model from form
+        question = request.form.get('question')
+        model = request.form.get('model')
 
-    # Make API request
-    response = openai.ChatCompletion.create(
-        model=model,
-        messages=[
-            {
+        # Initialize the 'messages' session variable if it doesn't exist
+        if 'messages' not in session:
+            session['messages'] = [{
                 "role": "system",
                 "content": "You are a helpful assistant."
-            },
-            {
-                "role": "user",
-                "content": question
-            }
-        ]
-    )
+            }]
 
-    # Get the answer
-    answer = response['choices'][0]['message']['content']
+        # Add the new user message
+        session['messages'].append({
+            "role": "user",
+            "content": question
+        })
 
-    # Render the template with the answer
-    return render_template('ask_gpt.html', answer=answer)
+        # Make API request
+        response = openai.ChatCompletion.create(
+            model=model,
+            messages=session['messages']
+        )
+
+        # Add the new assistant message
+        session['messages'].append({
+            "role": "assistant",
+            "content": response['choices'][0]['message']['content']
+        })
+
+        # Get the answer
+        answer = response['choices'][0]['message']['content']
+
+        # Render the template with the answer
+        return render_template('ask_gpt.html', answer=answer)
+    else:
+        return render_template('ask_gpt.html')
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=False)
