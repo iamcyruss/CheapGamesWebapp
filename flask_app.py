@@ -1,4 +1,3 @@
-
 from cheapsharkapi import return_cheapest as rc
 from cheapsharkapi import return_game as rg
 from cheapsharkapi import set_alert as sa
@@ -46,8 +45,11 @@ class Conversation(db.Model):
     messages = db.Column(db.Text)  # Store conversation messages as a JSON string
 
 
-with app.app_context():
-    db.create_all()
+try:
+    with app.app_context():
+        db.create_all()
+except Exception as e:
+    print(e)
 
 
 @app.route('/', methods=["GET", "POST"])
