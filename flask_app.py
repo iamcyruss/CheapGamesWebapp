@@ -21,6 +21,7 @@ CHEAPSHARK_API_STORES = "https://www.cheapshark.com/api/1.0/stores"
 CHEAPSHARP_REDIRECT = "https://www.cheapshark.com/redirect?dealID="
 CHEAPSHARK_API_ALERT = "https://www.cheapshark.com/api/1.0/alerts"
 
+db = SQLAlchemy()
 app = Flask(__name__)
 
 SQLALCHEMY_DATABASE_URI = "mysql+mysqlconnector://{username}:{password}@{hostname}/{databasename}".format(
@@ -33,9 +34,7 @@ app.config["SQLALCHEMY_DATABASE_URI"] = SQLALCHEMY_DATABASE_URI
 app.config["SQLALCHEMY_POOL_RECYCLE"] = 299
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
-db = SQLAlchemy(app)
-#with app.app_context():
-    #db.create_all()
+db.init_app(app)
 
 migrate = Migrate(app, db)
 
@@ -45,6 +44,10 @@ input_data = ''
 class Conversation(db.Model):
     id = db.Column(db.String, primary_key=True)
     messages = db.Column(db.Text)  # Store conversation messages as a JSON string
+
+
+with app.app_context():
+    db.create_all()
 
 
 @app.route('/', methods=["GET", "POST"])
