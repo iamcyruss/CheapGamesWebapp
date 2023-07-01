@@ -7,7 +7,9 @@ from flask import Flask, render_template, redirect, request, url_for
 import os
 import openai
 
-openai.api_key_path = '/home/rnicosia/toppy.txt'
+OPENAI_KEY = os.getenv("OPENAI_KEY")
+openai.api_key = OPENAI_KEY
+#openai.api_key_path = '/home/rnicosia/toppy.txt'
 # https://apidocs.cheapshark.com/
 
 SQLPASS = os.getenv("SQLPASS")
