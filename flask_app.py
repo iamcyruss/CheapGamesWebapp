@@ -34,6 +34,8 @@ app.config["SQLALCHEMY_POOL_RECYCLE"] = 299
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
 db = SQLAlchemy(app)
+with app.app_context():
+    db.create_all()
 
 migrate = Migrate(app, db)
 
