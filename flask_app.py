@@ -9,6 +9,7 @@ import openai
 
 OPENAI_KEY = os.getenv("OPENAI_KEY")
 openai.api_key = OPENAI_KEY
+
 #openai.api_key_path = '/home/rnicosia/toppy.txt'
 # https://apidocs.cheapshark.com/
 
@@ -33,7 +34,6 @@ cheapshark_response_json = cheapshark_response.json()
 '''
 
 app = Flask(__name__)
-app.config["DEBUG"] = False
 
 """
 SQLALCHEMY_DATABASE_URI = "mysql+mysqlconnector://{username}:{password}@{hostname}/{databasename}".format(
@@ -179,19 +179,26 @@ def submit():
     model = request.form.get('model')
 
     # Make API request
-    response = openai.Completion.create(
-        engine=model,
-        prompt=question,
-        max_tokens=100
+    response = openai.ChatCompletion.create(
+        model=model,
+        messages=[
+            {
+                "role": "system",
+                "content": "You are a helpful assistant."
+            },
+            {
+                "role": "user",
+                "content": question
+            }
+        ]
     )
 
     # Get the answer
-    answer = response.choices[0].text.strip()
+    answer = response['choices'][0]['message']['content']
 
     # Render the template with the answer
     return render_template('ask_gpt.html', answer=answer)
 
-"""
-if __name__ == '__main__':
+
+if __name__ == '__flask_app__':
     app.run(debug=False)
-"""
