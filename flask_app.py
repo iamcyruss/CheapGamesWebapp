@@ -5,6 +5,7 @@ from cheapsharkapi import set_alert as sa
 from cheapsharkapi import manage_alerts as ma
 from flask import Flask, render_template, redirect, request, url_for
 import os
+import openai
 
 # https://apidocs.cheapshark.com/
 
@@ -162,6 +163,32 @@ def index():
             return render_template("main_page.html", cheapshark_data=cheapshark_data)
     #user_input_data.append(request.form["contents"])
 
-#@app.route('/wibble')
-#def wibble():
-    #return cheapshark_response_json
+
+@app.route('/fun')
+def home():
+    return render_template('ask_gpt.html')
+
+
+@app.route('/submit', methods=['POST'])
+def submit():
+    # Get question and model from form
+    question = request.form.get('question')
+    model = request.form.get('model')
+
+    # Make API request
+    response = openai.Completion.create(
+        engine=model,
+        prompt=question,
+        max_tokens=100
+    )
+
+    # Get the answer
+    answer = response.choices[0].text.strip()
+
+    # Render the template with the answer
+    return render_template('ask_gpt.html', answer=answer)
+
+"""
+if __name__ == '__main__':
+    app.run(debug=False)
+"""
