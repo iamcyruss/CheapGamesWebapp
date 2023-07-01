@@ -6,6 +6,9 @@ from cheapsharkapi import manage_alerts as ma
 from flask import Flask, request, render_template, session
 import os
 import openai
+from flask_sqlalchemy import SQLAlchemy
+from flask_migrate import Migrate
+import json
 
 OPENAI_KEY = os.getenv("OPENAI_KEY")
 openai.api_key = OPENAI_KEY
@@ -30,7 +33,16 @@ app.config["SQLALCHEMY_DATABASE_URI"] = SQLALCHEMY_DATABASE_URI
 app.config["SQLALCHEMY_POOL_RECYCLE"] = 299
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
+db = SQLAlchemy(app)
+
+migrate = Migrate(app, db)
+
 input_data = ''
+
+
+class Conversation(db.Model):
+    id = db.Column(db.String, primary_key=True)
+    messages = db.Column(db.Text)  # Store conversation messages as a JSON string
 
 
 @app.route('/', methods=["GET", "POST"])
@@ -154,42 +166,55 @@ def index():
 @app.route('/fun', methods=['POST'])
 def submit():
     if request.method == 'POST':
-        # Get question and model from form
         question = request.form.get('question')
         model = request.form.get('model')
+        conversation_id = request.form.get('conversation_id')
 
-        # Initialize the 'messages' session variable if it doesn't exist
-        if 'messages' not in session:
-            session['messages'] = [{
-                "role": "system",
-                "content": "You are a helpful assistant."
-            }]
+        # get existing conversation or start a new one
+        conversation_record = Conversation.query.get(conversation_id)
+        if conversation_record:
+            conversation = json.loads(conversation_record.messages)
+        else:
+            conversation = [
+                {
+                    "role": "system",
+                    "content": "You are a helpful assistant."
+                }
+            ]
 
-        # Add the new user message
-        session['messages'].append({
+        conversation.append({
             "role": "user",
             "content": question
         })
 
-        # Make API request
         response = openai.ChatCompletion.create(
             model=model,
-            messages=session['messages']
+            messages=conversation
         )
 
-        # Add the new assistant message
-        session['messages'].append({
+        # add the assistant's reply to the conversation
+        conversation.append({
             "role": "assistant",
             "content": response['choices'][0]['message']['content']
         })
 
-        # Get the answer
-        answer = response['choices'][0]['message']['content']
+        # update the stored conversations
+        if conversation_record:
+            conversation_record.messages = json.dumps(conversation)
+        else:
+            conversation_record = Conversation(id=conversation_id, messages=json.dumps(conversation))
+            db.session.add(conversation_record)
+        db.session.commit()
 
-        # Render the template with the answer
-        return render_template('ask_gpt.html', answer=answer)
+        conversations = {conversation.id: json.loads(conversation.messages) for conversation in
+                         Conversation.query.all()}
+
+        return render_template('ask_gpt2.html', answer=response['choices'][0]['message']['content'],
+                               conversations=conversations)
     else:
-        return render_template('ask_gpt.html')
+        conversations = {conversation.id: json.loads(conversation.messages) for conversation in
+                         Conversation.query.all()}
+        return render_template('ask_gpt2.html', conversations=conversations)
 
 
 if __name__ == '__main__':
