@@ -44,10 +44,8 @@ input_data = ''
 class Conversation(db.Model):
     id = db.Column(db.String, primary_key=True)
     messages = db.Column(db.Text)  # Store conversation messages as a JSON string
-
-
-with app.app_context():
-    db.create_all()
+    with app.app_context():
+        db.create_all()
 
 
 @app.route('/', methods=["GET", "POST"])
