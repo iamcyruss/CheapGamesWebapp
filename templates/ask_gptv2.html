@@ -2,21 +2,26 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Ask GPT</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
             background-color: #343a40;
-            color: #ffffff;
+            color: #fff;
         }
-        .jumbotron, .card {
+        .card, .jumbotron {
             background-color: #6c757d;
+        }
+        .btn-primary {
+            background-color: #28a745;
+            border-color: #28a745;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="jumbotron mt-5 text-white">
+        <div class="jumbotron mt-5">
             <h1 class="display-4">Ask GPT</h1>
             <form method="POST" action="/fun">
                 <div class="form-group">
@@ -25,13 +30,17 @@
                 </div>
                 <div class="form-group">
                     <label for="model">Model</label>
-                    <input type="text" class="form-control" id="model" name="model" placeholder="Model (e.g. gpt-4)">
+                    <select class="form-control" id="model" name="model">
+                        <option selected>Select a Model</option>
+                        <option value="gpt-3.5-turbo">gpt-3.5-turbo</option>
+                        <option value="gpt-4">gpt-4</option>
+                    </select>
                 </div>
                 <div class="form-group">
                     <label for="conversation_id">Conversation ID</label>
                     <input type="text" class="form-control" id="conversation_id" name="conversation_id" placeholder="Conversation ID">
                 </div>
-                <button type="submit" class="btn btn-dark">Ask</button>
+                <button type="submit" class="btn btn-primary">Ask</button>
             </form>
         </div>
 
@@ -43,18 +52,19 @@
         <div class="mt-5">
             <h2>Conversations:</h2>
             {% for conversation_id, conversation in conversations.items() %}
-                <div class="card mt-3 text-white">
+                <div class="card mt-3">
                     <div class="card-header">
                         Conversation ID: {{ conversation_id }}
                     </div>
                     <ul class="list-group list-group-flush">
                         {% for message in conversation %}
-                            <li class="list-group-item text-dark"><strong>{{ message.role }}:</strong> {{ message.content }}</li>
+                            <li class="list-group-item"><strong>{{ message.role }}:</strong> {{ message.content }}</li>
                         {% endfor %}
                     </ul>
                 </div>
             {% endfor %}
         </div>
     </div>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
