@@ -45,11 +45,13 @@ class Conversation(db.Model):
     messages = db.Column(db.Text)  # Store conversation messages as a JSON string
 
 
+"""
 try:
     with app.app_context():
         db.create_all()
 except Exception as e:
     print(e)
+"""
 
 
 @app.route('/', methods=["GET", "POST"])
