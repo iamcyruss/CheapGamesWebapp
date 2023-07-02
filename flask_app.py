@@ -41,7 +41,7 @@ input_data = ''
 
 
 class Conversation(db.Model):
-    id = db.Column(db.String, primary_key=True)
+    id = db.Column(db.String(256), primary_key=True)
     messages = db.Column(db.Text)  # Store conversation messages as a JSON string
 
 
