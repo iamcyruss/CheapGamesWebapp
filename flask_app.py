@@ -23,7 +23,7 @@ CHEAPSHARK_API_ALERT = "https://www.cheapshark.com/api/1.0/alerts"
 db = SQLAlchemy()
 app = Flask(__name__)
 
-SQLALCHEMY_DATABASE_URI = "mysql+mysqlconnector://{username}:{password}@{hostname}/{databasename}?charset=utf8mb4&collation=utf8mb4_general_ci".format(
+SQLALCHEMY_DATABASE_URI = "mysql+mysqlconnector://{username}:{password}@{hostname}/{databasename}?collation=utf8mb4_general_ci".format(
     username="rnicosia",
     password=SQLPASS,
     hostname="rnicosia.mysql.pythonanywhere-services.com",
