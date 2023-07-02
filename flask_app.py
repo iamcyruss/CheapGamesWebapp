@@ -218,12 +218,12 @@ def submit():
         conversations = {conversation.id: json.loads(conversation.messages) for conversation in
                          Conversation.query.all()}
 
-        return render_template('ask_gpt2.html', answer=response['choices'][0]['message']['content'],
+        return render_template('ask_gptv2.html', answer=response['choices'][0]['message']['content'],
                                conversations=conversations)
     else:
         conversations = {conversation.id: json.loads(conversation.messages) for conversation in
                          Conversation.query.all()}
-        return render_template('ask_gpt2.html', conversations=conversations)
+        return render_template('ask_gptv2.html', conversations=conversations)
 
 
 if __name__ == '__main__':
