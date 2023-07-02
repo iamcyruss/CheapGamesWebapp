@@ -172,7 +172,7 @@ def index():
     # user_input_data.append(request.form["contents"])
 
 
-@app.route('/fun', methods=['POST'])
+@app.route('/fun', methods=['GET', 'POST'])
 def submit():
     if request.method == 'POST':
         question = request.form.get('question')
