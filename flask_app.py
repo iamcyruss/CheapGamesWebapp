@@ -229,43 +229,43 @@ def submit():
 #dive_site_stuff_below
 @app.route('/dive-site')
 def dive_site_index():
-        return render_template('/dive_site/home.html')
+        return render_template('dive-site/home.html')
 
 @app.route('/dive-site/about')
 def dive_site_about():
-        return render_template('dive_site/about.html')
+        return render_template('dive-site/about.html')
 
 @app.route('/dive-site/contact')
 def dive_site_contact():
-        return render_template('dive_site/contact.html')
+        return render_template('dive-site/contact.html')
 
 @app.route('/dive-site/destinations')
 def dive_site_destinations():
-        return render_template('dive_site/destinations.html')
+        return render_template('dive-site/destinations.html')
 
 @app.route('/dive-site/indonesia')
 def dive_site_indonesia():
-        return render_template('dive_site/indonesia.html')
+        return render_template('dive-site/indonesia.html')
 
 @app.route('/dive-site/maldives')
 def dive_site_maldives():
-        return render_template('dive_site/maldives.html')
+        return render_template('dive-site/maldives.html')
 
 @app.route('/dive-site/galapagos')
 def dive_site_galapagos():
-        return render_template('dive_site/galapagos.html')
+        return render_template('dive-site/galapagos.html')
 
 @app.route('/dive-site/french-polynesia')
 def dive_site_french_polynesia():
-        return render_template('dive_site/french-polynesia.html')
+        return render_template('dive-site/french-polynesia.html')
 
 @app.route('/dive-site/papua-new-guinea')
 def dive_site_papua_new_guinea():
-        return render_template('dive_site/papua-new-guinea.html')
+        return render_template('dive-site/papua-new-guinea.html')
 
 @app.route('/dive-site/fiji')
 def dive_site_fiji():
-        return render_template('dive_site/fiji.html')
+        return render_template('dive-site/fiji.html')
 
 if __name__ == '__main__':
     app.run(debug=False)
