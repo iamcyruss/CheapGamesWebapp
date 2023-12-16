@@ -1,0 +1,113 @@
+{% extends 'index.html' %}
+
+{% block content %}
+
+<nav class="navbar navbar-expand-lg navbar-light bg-dark bg-opacity-75 navbar-custom"">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('dive_site_index') }}">GLOBAL DIVE EXPEDITIONS</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('dive_site_about') }}">ADVENTURE COUPLE</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" href="{{ url_for('dive_site_destinations') }}">DESTINATIONS</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('dive_site_contact') }}">CONTACT</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<div class="container-fluid" id="destinations-container" style="margin-top: 2.5%; padding-bottom: 3%;">
+    <div class="row" style="height: 500px; width: 100%;">
+        <!-- Container 1 (Picture on Left) -->
+        <div class="col" id="destinations-indonesia" style="width: 50%;">
+        </div>
+        <div class="col" id="destination-info">
+            <h2>Indonesia</h2>
+            <p>More than 3000 fish species and home to 75% of the coral species in the world. With more than 17,000 islands, you can never dive it enough or explore enough of this singular destination.</p>
+            <p>Beyond Diving: From terraced rice fields to temples and uncontacted tribes. Indo is a geographically and geologically immense archipelago of culture, cuisine and history.</p>
+            <a href="{{ url_for('dive_site_indonesia') }}" class="btn btn-dark" id="destination-button" role="button">Indonesia</a>
+        </div>
+    </div>
+
+    <div class="row" style="height: 500px;">
+        <!-- Container 2 (Text on Left) -->
+        <div class="col" id="destination-info">
+            <h2>Maldives</h2>
+            <p>Carin’s nickname is Mantagirl which makes the Maldives one of her all time favorite destinations because mantas are the mantra.  You can find mantas year around at different atolls.  Learning about mantas from her perspective while in the Maldives is quite unique and you will forever be in love with these gentle giants.</p>
+            <p>Beyond Diving:  Luxuriate in the most exquisite overwater resorts in the world. The atolls of the Maldives are a phenomenon without equal.  To see them in their finest, view these pearls of the world from the window of a sea plane.</p>
+            <a href="{{ url_for('dive_site_maldives') }}" class="btn btn-dark" id="destination-button" role="button">Maldives</a>
+        </div>
+        <div class="col" id="destinations-maldives">
+        </div>
+    </div>
+
+    <div class="row" style="height: 500px;">
+        <!-- Container 3 (Picture on Left) -->
+        <div class="col" id="destinations-galapagos">
+        </div>
+        <div class="col" id="destination-info">
+            <h2>Galapagos</h2>
+            <p>Endemism – 86 of the 500 fish species here are found nowhere else in the world.  Only here can you dive with species such as the Camotillo, Galapagos Barnacle Blenny, Galapagos Triplefin Blenny, Gravo Clinid, Blue Banded Goby, and the Galapagos Puffer.  The pelagic life can be staggering: massive whale sharks, humpback whales, flights of rays, walls of silky and hammerhead sharks. Fast currents.</p>
+            <p>Beyond Diving: The endemism continues on land: The Galapagos Tortoise, Flightless Cormorants, Marine Iguanas. Galapagos Finches, Galapagos Fur Seals and so much more.The highlands of Ecuador provide colorful markets, high volacanos and historic haciendas.</p>
+            <a href="{{ url_for('dive_site_galapagos') }}" class="btn btn-dark" id="destination-button" role="button">Galapagos</a>
+        </div>
+    </div>
+
+    <div class="row" style="height: 500px;">
+        <!-- Container 4 (Text on Left) -->
+        <div class="col" id="destination-info">
+            <h2>French Polynesia</h2>
+            <p>Ridlon and Carin began diving remote French Polynesia long before most dive operators had appeared on the scene.  They learned the ropes from French dive pioneer, Yves Lefèrvre who lived in a hut on the beach for a decade on Rangiroa before anyone else arrived. The island remains a magnificent place for deep diving with hundreds of sharks and rays – with one of the most vibrant gray reef shark populations in the world.</p>
+            <p>Beyond Diving While the Tuamotus are remote, the islands receive amazing French wines and cheeses.  Grab some and head to Tiputa Pass to watch the dolphins leap and play in the tides. If you stay on Rangiroa long enough, the fresh fruit boat arrives with stalks of bananas and bags of amazing oranges!</p>
+            <a href="{{ url_for('dive_site_french_polynesia') }}" class="btn btn-dark" id="destination-button" role="button">French Polynesia</a>
+        </div>
+        <div class="col" id="destinations-polynesia">
+        </div>
+    </div>
+
+    <div class="row" style="height: 500px;">
+        <!-- Container 5 (Picture on Left) -->
+        <div class="col" id="destinations-papua">
+        </div>
+        <div class="col" id="destination-info">
+            <h2>Papua New Guinea</h2>
+            <p>The second largest island in the world, still lost in time above and below the waves. It’s very much still the wild, wild west. With a stunning species diversity – over 1000 fish and 200 coral species in unspoilt waters and wrecks from WWII.</p>
+            <p>Beyond Diving:  PNG is wild and wooly.  Head with us to hidden places in the highlands to see tribal life far off the tourist path.</p>
+            <a href="{{ url_for('dive_site_papua_new_guinea') }}" class="btn btn-dark" id="destination-button" role="button">Papua New Guinea</a>
+        </div>
+    </div>
+
+    <div class="row" style="height: 500px;">
+        <!-- Container 6 (Text on Left) -->
+        <div class="col" id="destination-info">
+            <h2>Fiji</h2>
+            <p>Being coined by Jacques Cousteau as the Soft Coral Capital of the World gave Fiji much of its diving identity.  Corals like siphonogorgia and dendronephthya are responsible for the rainbow of pink, red, orange and purple coral that blossom in a strengthening current and line the walls of underwater art galleries worldwide.  But soft coral isn’t the only reason to head to Fiji.  Little known hard coral areas like The Great Sea Reef offer an adventurous diver a wonder of opportunity beyond the milk run.</p>
+            <p>Beyond Diving: Take in a Meke, the traditional dance ceremony in a local village, drink kava with the locals, hike in the Koroyanitu National Park and by all means meet the children.</p>
+            <a href="{{ url_for('dive_site_fiji') }}" class="btn btn-dark" id="destination-button" role="button">Fiji</a>
+        </div>
+        <div class="col" id="destinations-fiji">
+        </div>
+    </div>
+
+    <!-- Repeat the pattern for the next 3 containers -->
+</div>
+
+<footer class="bg-dark bg-opacity-75">
+    <a href="http://www.linkedin.com/in/seetheworld" target="_blank" class="linkedin">
+        <img src="/static/img/dive-site/linkedin-svgrepo-com.svg" alt="Carin's LinkedIn" style="width: 40px; height: 40px;">
+    </a>
+    <a href="http://www.linkedin.com/in/ridlon" target="_blank" class="linkedin">
+        <img src="/static/img/dive-site/linkedin-svgrepo-com.svg" alt="Ridlon's LinkedIn" style="width: 40px; height: 40px;">
+    </a>
+</footer>
+
+{% endblock %}

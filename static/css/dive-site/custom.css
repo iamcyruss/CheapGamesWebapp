@@ -1,0 +1,319 @@
+/* Add your custom styles here */
+
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow: auto;
+    background-image: url('/static/img/dive-site/slivertip.jpg');
+    background-size: cover;
+    position: relative;
+    z-index: 1;
+    color: #fff; /* White text color */
+    font-family: 'Roboto', sans-serif;
+}
+
+body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent black overlay */
+    z-index: -1;
+}
+
+h1 {
+    font-size: 36px;
+    margin-bottom: 50px;
+    color: #ae9f6a;
+}
+
+#h1-contact-us {
+    font-family: "Playfair Display", sans-serif;
+    font-size: 36px;
+    margin-bottom: 50px;
+    color: #ae9f6a;
+}
+
+h2 {
+    font-size: 30px;
+    margin: 40px;
+    color: #14379e;
+}
+
+h3 {
+    font-size: 24px;
+    margin-bottom: 35px;
+}
+
+p {
+    font-size: 18px;
+    line-height: 1.5;
+    color: #abb8c3;
+}
+
+#p-contact-us {
+    font-family: "Crimson Text", sans-serif;
+    font-size: 24px;
+    line-height: 1.5;
+    color: #dddddd;
+    font-weight: 400;
+    font-style: italic;
+    text-transform: none;
+}
+
+#a-contact-us {
+    font-family: "Crimson Text", sans-serif;
+    font-size: 18px;
+    line-height: 1.5;
+    color: rgba(74,144,226,1);
+}
+
+footer .linkedin img {
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+}
+
+.container {
+    background-color: rgba(255, 255, 255, 0.1); /* Semi-transparent white background for content containers */
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.container-about {
+    display: flex;
+    height: 100vh; /* Full viewport height */
+}
+
+#destinations-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.row {
+    padding: 0;
+    margin: 0;
+}
+
+.row img {
+    width: 100%; /* Adjust width to fit the column */
+    height: 600px; /* Maintain aspect ratio */
+    display: block; /* Remove inline spacing */
+}
+
+#destinations-indonesia {
+    background-image: url('/static/img/dive-site/indonesia.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+#destinations-maldives {
+    background-image: url('/static/img/dive-site/maldives-air.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+#destinations-galapagos {
+    background-image: url('/static/img/dive-site/galapagos.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+#destinations-polynesia {
+    background-image: url('/static/img/dive-site/polynesia.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+#destinations-papua {
+    background-image: url('/static/img/dive-site/papua.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    width: 100%;
+}
+
+#destinations-fiji {
+    background-image: url('/static/img/dive-site/fiji.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    width: 100%;
+}
+
+#destination-info {
+    background-color: white;
+}
+
+#destination-info p {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+#destination-button {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-left: 30px;
+    margin-right: 30px;
+}
+
+.left-side, .right-side {
+    flex: 1;
+    width: 50%;
+    position: relative;
+}
+
+.left-side {
+    background-image: url('/static/img/dive-site/tahiti-bg.jpg');
+    background-size: cover;
+    color: white; /* Assuming a darker image */
+}
+
+.left-side::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent black background */
+    z-index: 1;
+}
+
+.text-content {
+    position: relative;
+    z-index: 2; /* Ensure text appears above the overlay */
+    padding: 75px 20px 20px;
+}
+
+.right-side {
+    background-color: white;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.right-side img {
+    max-width: 100%;
+    height: auto;
+    padding: 20px 20px 20px;
+}
+
+/* Customize the footer with additional styles */
+footer {
+    color: #fff;
+    text-align: center;
+    padding: 10px 0;
+    width: 100%;
+    position: fixed; /* Use fixed position instead of absolute */
+    bottom: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+}
+
+.navbar {
+    font-family: 'Montserrat', sans-serif;
+}
+
+/* Style links with a scuba diving theme */
+.navbar-light .navbar-nav .nav-link {
+    font-size: 12px;
+    color: rgb(76, 196, 236);
+    padding: 0.5rem 1rem;
+    transition: color 0.3s; /* Smooth color transition on hover */
+}
+
+.navbar-light .navbar-nav .nav-link:hover {
+    font-size: 12px;
+    color: #000000; /* Yellow on hover */
+}
+
+/* Style the current page link differently */
+.navbar-light .navbar-nav .nav-link.active {
+    font-size: 12px;
+    color: white; /* Darker color for the current page */
+}
+
+.navbar-custom {
+    position: fixed; /* or absolute */
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1030; /* High z-index to float above other elements */
+}
+
+.carousel {
+    display: flex;
+    flex-direction: row;
+    width: 100%; /* Adjust this as needed */
+    height: 100%; /* Set the height to 100% to make it full-screen */
+    margin: 0;
+    padding: 0;
+    animation: scroll 36s linear infinite;
+}
+
+.carousel-indicators li {
+    text-indent: 0;
+    list-style-type: none; /* Removes default numbering */
+    width: 10px;  /* Adjust width as needed */
+    height: 10px; /* Adjust height as needed */
+    border-radius: 50%; /* Makes the indicators circular */
+    background-color: #000; /* Change the color as needed */
+}
+
+.carousel-item {
+    text-align: center; /* Aligns the content of the carousel item to the center */
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.carousel-item img {
+    width: 100%;       /* Full width of the container */
+    height: 100%;      /* Full height of the container */
+    object-fit: cover; /* Resize image to cover the container */
+    display: none;
+}
+
+.img-fluid {
+    max-width: 100%;
+    height: auto;
+}
+  
+  /* Optional: add shadows and rounded corners for a cleaner look */
+.shadow-1-strong {
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+}
+  
+.rounded {
+    border-radius: 0.25rem;
+}
+
+.vertical-center {
+    min-height: 100vh; /* Full viewport height */
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Center horizontally */
+    background-color: rgba(255, 255, 255, 0.0); /* Adjust transparency as needed */
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.non-scrollable {
+    overflow: hidden;
+}

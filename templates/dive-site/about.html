@@ -1,0 +1,56 @@
+{% extends 'index.html' %}
+
+{% block content %}
+
+<nav class="navbar navbar-expand-lg navbar-light bg-dark bg-opacity-75 navbar-custom">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('dive_site_index') }}">GLOBAL DIVE EXPEDITIONS</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" href="{{ url_for('dive_site_about') }}">ADVENTURE COUPLE</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('dive_site_destinations') }}">DESTINATIONS</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('dive_site_contact') }}">CONTACT</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<div class="container-about">
+    <div class="left-side">
+        <div class="text-content">
+            <h1>Global Dive Expeditions</h1>
+            <h3><i>Bespoke Diving Expeditions</i></h3>
+            <p>Catering to private clients and invitation-only groups, Global Dive Expeditions has been leading divers to the world’s most unique destinations for more than 30 years – crafting a highly customizable blend of SCUBA diving, adventure, culture, conservation and humanitarian efforts. We have used the world’s finest boutique properties, unique cultural home stays, liveaboards, private jets, private yachts and tents in the middle of nowhere.</p>
+            <!-- Add more text as needed -->
+        </div>
+        <div class="text-content">
+            <h1>The Adventure Couple</h1>
+            <p>With more than 18,000 dives between them, Ridlon & Carin are among the elite of professional divers in the world and self-taught marine naturalists.  They met in the Turks & Caicos islands where Carin was a dive instructor and Ridlon a windsurfing and sailing instructor. From that moment forward, they have explored across 120 countries and all 7 continents, mostly underwater.</p>
+            <p>In addition to their dive expertise, Ridlon is an accomplished high-altitude mountaineer while Carin is an author and the first person to walk solo, unsupported across Cuba.  They have lead adventure and cultural trips for top luxury travel brands, including around the world by private jet trips and expedition cruises. They are both members of the prestigious Explorers Club.</p>
+            <!-- Add more text as needed -->
+        </div>
+        <div class="text-content">
+            <a href="http://www.linkedin.com/in/seetheworld" target="_blank" class="linkedin">
+                <img src="/static/img/dive-site/linkedin-svgrepo-com.svg" alt="Carin's LinkedIn" style="width: 40px; height: 40px;">
+            </a>
+            <a href="http://www.linkedin.com/in/ridlon" target="_blank" class="linkedin">
+                <img src="/static/img/dive-site/linkedin-svgrepo-com.svg" alt="Ridlon's LinkedIn" style="width: 40px; height: 40px;">
+            </a>
+        </div>
+    </div>
+    <div class="right-side">
+        <img src="/static/img/dive-site/carin-rid.png" width="450" height="675" alt="Ridlon top. Carin bottom.">
+    </div>
+</div>
+
+{% endblock %}
