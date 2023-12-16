@@ -229,7 +229,7 @@ def submit():
 #dive_site_stuff_below
 @app.route('/dive-site')
 def dive_site_index():
-        return render_template('dive_site/home.html')
+        return render_template('/dive_site/home.html')
 
 @app.route('/dive-site/about')
 def dive_site_about():
