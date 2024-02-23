@@ -48,6 +48,19 @@ class Conversation(db.Model):
     messages = db.Column(db.Text)  # Store conversation messages as a JSON string
 
 
+def format_answer(answer):
+    parts = answer.split("```")
+    formatted_parts = []
+    is_code = False
+    for part in parts:
+        if is_code:
+            # This part is code, wrap it in <pre><code>
+            formatted_parts.append(f"<pre><code>{part}</code></pre>")
+        else:
+            # This part is regular text, leave it as is
+            formatted_parts.append(part)
+        is_code = not is_code  # Toggle between code and non-code
+    return ''.join(formatted_parts)
 """
 try:
     with app.app_context():
@@ -230,7 +243,9 @@ def submit():
         conversations = {conversation.id: json.loads(conversation.messages) for conversation in
                          Conversation.query.all()}
 
-        return render_template('ask_gptv2.html', answer=response['choices'][0]['message']['content'],
+        answer = response['choices'][0]['message']['content']
+        formatted_answer = format_answer(answer)
+        return render_template('ask_gptv2.html', answer=formatted_answer,
                                conversations=conversations)
     else:
         conversations = {conversation.id: json.loads(conversation.messages) for conversation in
