@@ -206,7 +206,7 @@ def submit():
                 "content": question
             })
         except OperationalError as e:
-            return render_template("404.html")
+            print(e)
 
         response = openai.ChatCompletion.create(
             model=model,
@@ -278,6 +278,10 @@ def dive_site_papua_new_guinea():
 @app.route('/dive-site/fiji')
 def dive_site_fiji():
         return render_template('dive-site/fiji.html')
+
+@app.errorhandler(404) 
+def page_not_found(e):
+    return render_template('404.html'), 404
 
 if __name__ == '__main__':
     app.run(debug=False)
