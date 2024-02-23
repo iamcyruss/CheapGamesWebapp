@@ -8,6 +8,7 @@ import openai
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 import json
+from sqlalchemy.exc import OperationalError
 
 OPENAI_KEY = os.getenv("OPENAI_KEY")
 openai.api_key = OPENAI_KEY
@@ -188,21 +189,24 @@ def submit():
                 agent_note = f.read()
 
         # get existing conversation or start a new one
-        conversation_record = Conversation.query.get(conversation_id)
-        if conversation_record:
-            conversation = json.loads(conversation_record.messages)
-        else:
-            conversation = [
-                {
-                    "role": "system",
-                    "content": agent_note
-                }
-            ]
+        try:
+            conversation_record = Conversation.query.get(conversation_id)
+            if conversation_record:
+                conversation = json.loads(conversation_record.messages)
+            else:
+                conversation = [
+                    {
+                        "role": "system",
+                        "content": agent_note
+                    }
+                ]
 
-        conversation.append({
-            "role": "user",
-            "content": question
-        })
+            conversation.append({
+                "role": "user",
+                "content": question
+            })
+        except OperationalError as e:
+            return render_template("404.html")
 
         response = openai.ChatCompletion.create(
             model=model,
