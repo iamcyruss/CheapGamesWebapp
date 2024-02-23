@@ -180,6 +180,12 @@ def submit():
         question = request.form.get('question')
         model = request.form.get('model')
         conversation_id = request.form.get('conversation_id')
+        agent_note = request.form.get('conversation_id')
+        if len(agent_note) == 0:
+            agent_note = "You are a helpful assistant."
+        elif agent_note.lower() == "python":
+            with open("../static/agent_note.txt", "r") as f:
+                agent_note = f.read()
 
         # get existing conversation or start a new one
         conversation_record = Conversation.query.get(conversation_id)
@@ -189,7 +195,7 @@ def submit():
             conversation = [
                 {
                     "role": "system",
-                    "content": "You are a helpful assistant."
+                    "content": agent_note
                 }
             ]
 
