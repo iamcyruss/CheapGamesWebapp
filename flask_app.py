@@ -30,8 +30,10 @@ SQLALCHEMY_DATABASE_URI = "mysql+mysqlconnector://{username}:{password}@{hostnam
     databasename="rnicosia$conversations",
 )
 app.config["SQLALCHEMY_DATABASE_URI"] = SQLALCHEMY_DATABASE_URI
-app.config["SQLALCHEMY_POOL_RECYCLE"] = -1
+app.config["SQLALCHEMY_POOL_RECYCLE"] = 299
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+app.config["SQLALCHEMY_POOL_SIZE"] = 5  # Default pool size
+app.config["SQLALCHEMY_MAX_OVERFLOW"] = 10  # Overflow connections
 
 db.init_app(app)
 
