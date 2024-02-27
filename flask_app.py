@@ -194,7 +194,7 @@ def submit():
         question = request.form.get('question')
         model = request.form.get('model')
         conversation_id = request.form.get('conversation_id')
-        agent_note = request.form.get('conversation_id')
+        agent_note = request.form.get('agent_note')
         if len(agent_note) == 0:
             agent_note = "You are a helpful assistant."
         elif agent_note.lower() == "python":
