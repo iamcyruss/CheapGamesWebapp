@@ -198,7 +198,7 @@ def submit():
         if len(agent_note) == 0:
             agent_note = "You are a helpful assistant."
         elif agent_note.lower() == "python":
-            with open("agent_note.txt", "r") as f:
+            with open("static/agent_note.txt", "r") as f:
                 agent_note = f.read()
 
         # get existing conversation or start a new one
