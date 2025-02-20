@@ -42,7 +42,12 @@
 
         <div class="mt-5">
             <h2>Response:</h2>
-            <p>{{ answer | safe }}</p>
+            <div class="card">
+                <div class="card-header"><strong>Conversation ID:</strong> {{ conversation_id if conversation_id else 'None' }}</div>
+                <div class="card-body">
+                    <p class="lead">{{ answer | safe }}</p>
+                </div>
+            </div>
         </div>
 
         <div class="mt-5">
