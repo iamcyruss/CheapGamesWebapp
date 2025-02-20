@@ -10,6 +10,7 @@ from flask_migrate import Migrate
 import json
 from sqlalchemy.exc import OperationalError
 from werkzeug.utils import secure_filename
+import uuid
 
 
 ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'}
@@ -195,13 +196,15 @@ def index():
     # user_input_data.append(request.form["contents"])
 
 
+import uuid
+
 @app.route('/fun', methods=['GET', 'POST'])
 def submit():
     if request.method == 'POST':
         try:
             question = request.form.get('question', '').strip()
             model = request.form.get('model', 'gpt-4o')  # Default to GPT-4o
-            conversation_id = request.form.get('conversation_id')
+            conversation_id = request.form.get('conversation_id', '').strip()
             agent_note = request.form.get('agent_note', 'You are a helpful assistant.').strip()
             uploaded_file = request.files.get('file')
 
@@ -213,13 +216,18 @@ def submit():
                 except FileNotFoundError:
                     agent_note = "You are a helpful assistant."
 
-            # Handle conversation retrieval
-            conversation = [{"role": "system", "content": agent_note}]
-            if conversation_id:
-                conversation_record = Conversation.query.get(conversation_id)
-                if conversation_record:
-                    conversation = json.loads(conversation_record.messages)
+            # Ensure a valid conversation ID (generate a new one if not provided)
+            if not conversation_id:
+                conversation_id = str(uuid.uuid4())
 
+            # Retrieve existing conversation or start a new one
+            conversation_record = Conversation.query.get(conversation_id)
+            if conversation_record:
+                conversation = json.loads(conversation_record.messages)
+            else:
+                conversation = [{"role": "system", "content": agent_note}]
+
+            # Append the user's input
             conversation.append({"role": "user", "content": question})
 
             # Handle file uploads
@@ -247,11 +255,10 @@ def submit():
             answer = response['choices'][0]['message']['content']
             conversation.append({"role": "assistant", "content": answer})
 
-            # Update conversation record in DB
-            if conversation_id:
+            # Update the conversation in DB
+            if conversation_record:
                 conversation_record.messages = json.dumps(conversation)
             else:
-                conversation_id = str(len(conversation) + 1)  # Generate a simple ID
                 conversation_record = Conversation(id=conversation_id, messages=json.dumps(conversation))
                 db.session.add(conversation_record)
 
@@ -260,7 +267,7 @@ def submit():
             # Fetch all conversations
             conversations = {conv.id: json.loads(conv.messages) for conv in Conversation.query.all()}
 
-            return render_template('ask_gptv2.html', answer=format_answer(answer), conversations=conversations)
+            return render_template('ask_gptv2.html', answer=format_answer(answer), conversations=conversations, conversation_id=conversation_id)
 
         except Exception as e:
             print(f"Error: {e}")
