@@ -196,8 +196,6 @@ def index():
     # user_input_data.append(request.form["contents"])
 
 
-import uuid
-
 @app.route('/fun', methods=['GET', 'POST'])
 def submit():
     if request.method == 'POST':
