@@ -9,10 +9,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 import json
 from sqlalchemy.exc import OperationalError
-from werkzeug.utils import secure_filename
 
-
-ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'}
 OPENAI_KEY = os.getenv("OPENAI_KEY")
 openai.api_key = OPENAI_KEY
 
@@ -44,10 +41,6 @@ db.init_app(app)
 migrate = Migrate(app, db)
 
 input_data = ''
-
-# Function to check file type
-def allowed_file(filename):
-    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 
 class Conversation(db.Model):
@@ -198,76 +191,65 @@ def index():
 @app.route('/fun', methods=['GET', 'POST'])
 def submit():
     if request.method == 'POST':
+        question = request.form.get('question')
+        model = request.form.get('model')
+        conversation_id = request.form.get('conversation_id')
+        agent_note = request.form.get('agent_note')
+        if len(agent_note) == 0:
+            agent_note = "You are a helpful assistant."
+        elif agent_note.lower() == "python":
+            with open("static/agent_note.txt", "r") as f:
+                agent_note = f.read()
+
+        # get existing conversation or start a new one
         try:
-            question = request.form.get('question', '').strip()
-            model = request.form.get('model', 'gpt-4o')  # Default to GPT-4o
-            conversation_id = request.form.get('conversation_id')
-            agent_note = request.form.get('agent_note', 'You are a helpful assistant.').strip()
-            uploaded_file = request.files.get('file')
-
-            # Handle agent note reading from a file if needed
-            if agent_note.lower() == "python":
-                try:
-                    with open("static/agent_note.txt", "r") as f:
-                        agent_note = f.read()
-                except FileNotFoundError:
-                    agent_note = "You are a helpful assistant."
-
-            # Handle conversation retrieval
-            conversation = [{"role": "system", "content": agent_note}]
-            if conversation_id:
-                conversation_record = Conversation.query.get(conversation_id)
-                if conversation_record:
-                    conversation = json.loads(conversation_record.messages)
-
-            conversation.append({"role": "user", "content": question})
-
-            # Handle file uploads
-            files = []
-            if uploaded_file and allowed_file(uploaded_file.filename):
-                filename = secure_filename(uploaded_file.filename)
-                filepath = os.path.join("uploads", filename)
-                uploaded_file.save(filepath)
-                files.append({"file_path": filepath, "file_name": filename})
-
-            # Prepare OpenAI API request
-            api_request = {
-                "model": model,
-                "messages": conversation
-            }
-
-            # Attach files if any
-            if files:
-                api_request["files"] = files
-
-            # Make OpenAI API call
-            response = openai.ChatCompletion.create(**api_request)
-
-            # Add response to conversation
-            answer = response['choices'][0]['message']['content']
-            conversation.append({"role": "assistant", "content": answer})
-
-            # Update conversation record in DB
-            if conversation_id:
-                conversation_record.messages = json.dumps(conversation)
+            conversation_record = Conversation.query.get(conversation_id)
+            if conversation_record:
+                conversation = json.loads(conversation_record.messages)
             else:
-                conversation_id = str(len(conversation) + 1)  # Generate a simple ID
-                conversation_record = Conversation(id=conversation_id, messages=json.dumps(conversation))
-                db.session.add(conversation_record)
+                conversation = [
+                    {
+                        "role": "system",
+                        "content": agent_note
+                    }
+                ]
 
-            db.session.commit()
+            conversation.append({
+                "role": "user",
+                "content": question
+            })
+        except OperationalError as e:
+            print(e)
 
-            # Fetch all conversations
-            conversations = {conv.id: json.loads(conv.messages) for conv in Conversation.query.all()}
+        response = openai.ChatCompletion.create(
+            model=model,
+            messages=conversation
+        )
 
-            return render_template('ask_gptv2.html', answer=format_answer(answer), conversations=conversations)
+        # add the assistant's reply to the conversation
+        conversation.append({
+            "role": "assistant",
+            "content": response['choices'][0]['message']['content']
+        })
 
-        except Exception as e:
-            print(f"Error: {e}")
-            return render_template('ask_gptv2.html', error=str(e))
+        # update the stored conversations
+        if conversation_record:
+            conversation_record.messages = json.dumps(conversation)
+        else:
+            conversation_record = Conversation(id=conversation_id, messages=json.dumps(conversation))
+            db.session.add(conversation_record)
+        db.session.commit()
 
+        conversations = {conversation.id: json.loads(conversation.messages) for conversation in
+                         Conversation.query.all()}
+
+        answer = response['choices'][0]['message']['content']
+        formatted_answer = format_answer(answer)
+        return render_template('ask_gptv2.html', answer=formatted_answer,
+                               conversations=conversations)
     else:
-        conversations = {conv.id: json.loads(conv.messages) for conv in Conversation.query.all()}
+        conversations = {conversation.id: json.loads(conversation.messages) for conversation in
+                         Conversation.query.all()}
         return render_template('ask_gptv2.html', conversations=conversations)
 
 
