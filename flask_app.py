@@ -52,7 +52,7 @@ def allowed_file(filename):
 
 class Conversation(db.Model):
     id = db.Column(db.String(256), primary_key=True)
-    messages = db.Column(db.LargeBinary)  # Store conversation messages as a JSON string
+    messages = db.Column(db.Text)  # Store conversation messages as a JSON string
 
 
 def format_answer(answer):
