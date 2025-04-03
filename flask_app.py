@@ -41,7 +41,6 @@ app.config["SQLALCHEMY_POOL_SIZE"] = 5  # Default pool size
 app.config["SQLALCHEMY_MAX_OVERFLOW"] = 10  # Overflow connections
 
 db.init_app(app)
-
 migrate = Migrate(app, db)
 
 input_data = ''
@@ -53,7 +52,7 @@ def allowed_file(filename):
 
 class Conversation(db.Model):
     id = db.Column(db.String(256), primary_key=True)
-    messages = db.Column(db.Text)  # Store conversation messages as a JSON string
+    messages = db.Column(db.LargeBinary)  # Store conversation messages as a JSON string
 
 
 def format_answer(answer):
@@ -201,6 +200,72 @@ def submit():
     if request.method == 'POST':
         try:
             question = request.form.get('question', '').strip()
+            model = request.form.get('model', 'gpt-4o')
+            conversation_id = request.form.get('conversation_id', '').strip()
+            agent_note = request.form.get('agent_note', 'You are a helpful assistant.').strip()
+            uploaded_file = request.files.get('file')
+
+            if not conversation_id:
+                conversation_id = str(uuid.uuid4())
+
+            conversation_record = Conversation.query.get(conversation_id)
+            if conversation_record:
+                try:
+                    conversation = json.loads(conversation_record.messages)
+                except json.JSONDecodeError:
+                    conversation = [{"role": "system", "content": agent_note}]
+            else:
+                conversation = [{"role": "system", "content": agent_note}]
+
+            conversation.append({"role": "user", "content": question})
+
+            api_request = {"model": model, "messages": conversation}
+            response = openai.ChatCompletion.create(**api_request)
+            answer = response['choices'][0]['message']['content']
+            conversation.append({"role": "assistant", "content": answer})
+
+            try:
+                json.dumps(conversation)
+            except (TypeError, OverflowError):
+                print("Invalid JSON, skipping save.")
+                return render_template('ask_gptv2.html', error="Invalid JSON format.")
+
+            if conversation_record:
+                conversation_record.messages = json.dumps(conversation)
+            else:
+                conversation_record = Conversation(id=conversation_id, messages=json.dumps(conversation))
+                db.session.add(conversation_record)
+            db.session.commit()
+
+            conversations = {}
+            for conv in Conversation.query.all():
+                try:
+                    conversations[conv.id] = json.loads(conv.messages)
+                except json.JSONDecodeError:
+                    print(f"Skipping corrupted conversation ID {conv.id}")
+                    continue
+
+            return render_template('ask_gptv2.html', answer=answer, conversations=conversations, conversation_id=conversation_id)
+        except Exception as e:
+            print(f"Error: {e}")
+            return render_template('ask_gptv2.html', error=str(e))
+    else:
+        conversations = {}
+        for conv in Conversation.query.all():
+            try:
+                conversations[conv.id] = json.loads(conv.messages)
+            except json.JSONDecodeError:
+                print(f"Skipping corrupted conversation ID {conv.id}")
+                continue
+        return render_template('ask_gptv2.html', conversations=conversations)
+
+
+"""
+@app.route('/fun', methods=['GET', 'POST'])
+def submit():
+    if request.method == 'POST':
+        try:
+            question = request.form.get('question', '').strip()
             model = request.form.get('model', 'gpt-4o')  # Default to GPT-4o
             conversation_id = request.form.get('conversation_id', '').strip()
             agent_note = request.form.get('agent_note', 'You are a helpful assistant.').strip()
@@ -274,7 +339,7 @@ def submit():
     else:
         conversations = {conv.id: json.loads(conv.messages) for conv in Conversation.query.all()}
         return render_template('ask_gptv2.html', conversations=conversations)
-
+"""
 
 #dive_site_stuff_below
 @app.route('/dive-site')
